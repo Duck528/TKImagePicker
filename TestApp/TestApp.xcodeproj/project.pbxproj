@@ -7,21 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FC7BE95B2054470700D36655 /* TKImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = FC7BE9592054470700D36655 /* TKImagePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FC7BE9622054477B00D36655 /* TKImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC7BE9612054477B00D36655 /* TKImagePicker.storyboard */; };
-		FC7BE967205448E100D36655 /* TKImagePicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC7BE966205448E100D36655 /* TKImagePicker.xcassets */; };
+		FC7BE9752054561100D36655 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7BE9742054561100D36655 /* AppDelegate.swift */; };
+		FC7BE9772054561100D36655 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7BE9762054561100D36655 /* ViewController.swift */; };
+		FC7BE97A2054561100D36655 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC7BE9782054561100D36655 /* Main.storyboard */; };
+		FC7BE97C2054561100D36655 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC7BE97B2054561100D36655 /* Assets.xcassets */; };
+		FC7BE97F2054561100D36655 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC7BE97D2054561100D36655 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FC7BE9562054470700D36655 /* TKImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TKImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC7BE9592054470700D36655 /* TKImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TKImagePicker.h; sourceTree = "<group>"; };
-		FC7BE95A2054470700D36655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC7BE9612054477B00D36655 /* TKImagePicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TKImagePicker.storyboard; sourceTree = "<group>"; };
-		FC7BE966205448E100D36655 /* TKImagePicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TKImagePicker.xcassets; sourceTree = "<group>"; };
+		FC7BE9712054561100D36655 /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC7BE9742054561100D36655 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FC7BE9762054561100D36655 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FC7BE9792054561100D36655 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FC7BE97B2054561100D36655 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FC7BE97E2054561100D36655 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FC7BE9802054561100D36655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		FC7BE9522054470700D36655 /* Frameworks */ = {
+		FC7BE96E2054561100D36655 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -31,145 +35,135 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FC7BE94C2054470700D36655 = {
+		FC7BE9682054561100D36655 = {
 			isa = PBXGroup;
 			children = (
-				FC7BE9582054470700D36655 /* TKImagePicker */,
-				FC7BE9572054470700D36655 /* Products */,
+				FC7BE9732054561100D36655 /* TestApp */,
+				FC7BE9722054561100D36655 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		FC7BE9572054470700D36655 /* Products */ = {
+		FC7BE9722054561100D36655 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FC7BE9562054470700D36655 /* TKImagePicker.framework */,
+				FC7BE9712054561100D36655 /* TestApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FC7BE9582054470700D36655 /* TKImagePicker */ = {
+		FC7BE9732054561100D36655 /* TestApp */ = {
 			isa = PBXGroup;
 			children = (
-				FC7BE9652054487200D36655 /* Resources */,
-				FC7BE964205447DD00D36655 /* Cropper */,
-				FC7BE963205447BA00D36655 /* TKAlbum */,
-				FC7BE9592054470700D36655 /* TKImagePicker.h */,
-				FC7BE95A2054470700D36655 /* Info.plist */,
-				FC7BE9612054477B00D36655 /* TKImagePicker.storyboard */,
+				FC7BE9742054561100D36655 /* AppDelegate.swift */,
+				FC7BE9762054561100D36655 /* ViewController.swift */,
+				FC7BE9782054561100D36655 /* Main.storyboard */,
+				FC7BE97B2054561100D36655 /* Assets.xcassets */,
+				FC7BE97D2054561100D36655 /* LaunchScreen.storyboard */,
+				FC7BE9802054561100D36655 /* Info.plist */,
 			);
-			path = TKImagePicker;
-			sourceTree = "<group>";
-		};
-		FC7BE963205447BA00D36655 /* TKAlbum */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TKAlbum;
-			sourceTree = "<group>";
-		};
-		FC7BE964205447DD00D36655 /* Cropper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cropper;
-			sourceTree = "<group>";
-		};
-		FC7BE9652054487200D36655 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				FC7BE966205448E100D36655 /* TKImagePicker.xcassets */,
-			);
-			path = Resources;
+			path = TestApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		FC7BE9532054470700D36655 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FC7BE95B2054470700D36655 /* TKImagePicker.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		FC7BE9552054470700D36655 /* TKImagePicker */ = {
+		FC7BE9702054561100D36655 /* TestApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FC7BE95E2054470700D36655 /* Build configuration list for PBXNativeTarget "TKImagePicker" */;
+			buildConfigurationList = FC7BE9832054561100D36655 /* Build configuration list for PBXNativeTarget "TestApp" */;
 			buildPhases = (
-				FC7BE9512054470700D36655 /* Sources */,
-				FC7BE9522054470700D36655 /* Frameworks */,
-				FC7BE9532054470700D36655 /* Headers */,
-				FC7BE9542054470700D36655 /* Resources */,
+				FC7BE96D2054561100D36655 /* Sources */,
+				FC7BE96E2054561100D36655 /* Frameworks */,
+				FC7BE96F2054561100D36655 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = TKImagePicker;
-			productName = TKImagePicker;
-			productReference = FC7BE9562054470700D36655 /* TKImagePicker.framework */;
-			productType = "com.apple.product-type.framework";
+			name = TestApp;
+			productName = TestApp;
+			productReference = FC7BE9712054561100D36655 /* TestApp.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		FC7BE94D2054470700D36655 /* Project object */ = {
+		FC7BE9692054561100D36655 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
-				ORGANIZATIONNAME = "안덕환";
+				ORGANIZATIONNAME = Thekan;
 				TargetAttributes = {
-					FC7BE9552054470700D36655 = {
+					FC7BE9702054561100D36655 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = FC7BE9502054470700D36655 /* Build configuration list for PBXProject "TKImagePicker" */;
+			buildConfigurationList = FC7BE96C2054561100D36655 /* Build configuration list for PBXProject "TestApp" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
-			mainGroup = FC7BE94C2054470700D36655;
-			productRefGroup = FC7BE9572054470700D36655 /* Products */;
+			mainGroup = FC7BE9682054561100D36655;
+			productRefGroup = FC7BE9722054561100D36655 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FC7BE9552054470700D36655 /* TKImagePicker */,
+				FC7BE9702054561100D36655 /* TestApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		FC7BE9542054470700D36655 /* Resources */ = {
+		FC7BE96F2054561100D36655 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC7BE967205448E100D36655 /* TKImagePicker.xcassets in Resources */,
-				FC7BE9622054477B00D36655 /* TKImagePicker.storyboard in Resources */,
+				FC7BE97F2054561100D36655 /* LaunchScreen.storyboard in Resources */,
+				FC7BE97C2054561100D36655 /* Assets.xcassets in Resources */,
+				FC7BE97A2054561100D36655 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		FC7BE9512054470700D36655 /* Sources */ = {
+		FC7BE96D2054561100D36655 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC7BE9772054561100D36655 /* ViewController.swift in Sources */,
+				FC7BE9752054561100D36655 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		FC7BE9782054561100D36655 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC7BE9792054561100D36655 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FC7BE97D2054561100D36655 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC7BE97E2054561100D36655 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
-		FC7BE95C2054470700D36655 /* Debug */ = {
+		FC7BE9812054561100D36655 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -200,7 +194,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -224,12 +217,10 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		FC7BE95D2054470700D36655 /* Release */ = {
+		FC7BE9822054561100D36655 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -260,7 +251,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -277,48 +267,34 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		FC7BE95F2054470700D36655 /* Debug */ = {
+		FC7BE9842054561100D36655 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PZPY7DC474;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TKImagePicker/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thekan.TKImagePicker;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				INFOPLIST_FILE = TestApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thekan.TestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		FC7BE9602054470700D36655 /* Release */ = {
+		FC7BE9852054561100D36655 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PZPY7DC474;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TKImagePicker/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thekan.TKImagePicker;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
+				INFOPLIST_FILE = TestApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thekan.TestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -327,25 +303,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FC7BE9502054470700D36655 /* Build configuration list for PBXProject "TKImagePicker" */ = {
+		FC7BE96C2054561100D36655 /* Build configuration list for PBXProject "TestApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FC7BE95C2054470700D36655 /* Debug */,
-				FC7BE95D2054470700D36655 /* Release */,
+				FC7BE9812054561100D36655 /* Debug */,
+				FC7BE9822054561100D36655 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FC7BE95E2054470700D36655 /* Build configuration list for PBXNativeTarget "TKImagePicker" */ = {
+		FC7BE9832054561100D36655 /* Build configuration list for PBXNativeTarget "TestApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FC7BE95F2054470700D36655 /* Debug */,
-				FC7BE9602054470700D36655 /* Release */,
+				FC7BE9842054561100D36655 /* Debug */,
+				FC7BE9852054561100D36655 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = FC7BE94D2054470700D36655 /* Project object */;
+	rootObject = FC7BE9692054561100D36655 /* Project object */;
 }
