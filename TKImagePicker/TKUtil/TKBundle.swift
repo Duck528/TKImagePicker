@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+
+public class TKBundle {
+    public static func bundle() -> Bundle {
+        return Bundle(for: TKImagePickerViewController.self)
+    }
+}

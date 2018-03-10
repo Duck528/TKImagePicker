@@ -15,10 +15,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Image Picker View Controller-->
         <scene sceneID="o9V-3F-Okm">
             <objects>
-                <viewController id="c0y-kn-bRr" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="previewImagePicker" id="c0y-kn-bRr" customClass="TKImagePickerViewController" customModule="TKImagePicker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cuF-Wn-9AH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
