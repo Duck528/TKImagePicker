@@ -20,11 +20,9 @@ class TKAlbum {
         self.photoAssets = photoAssets
     }
     
-    func fetchPhotoAssets() {
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        
-        
+    func photo(at indexPath: IndexPath) -> PHAsset? {
+        guard indexPath.item >= 0, indexPath.item < photoAssets.count else { return nil }
+        return photoAssets[indexPath.item]
     }
 }
 

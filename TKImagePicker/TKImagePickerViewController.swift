@@ -47,7 +47,15 @@ extension TKImagePickerViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView,
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        guard
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? TKPhotoCell,
+            let currentAlbum = albumCollection.currentAlbum else {
+                return UICollectionViewCell()
+        }
+        
+        let photoAsset = currentAlbum.photo(at: indexPath)
+        cell.model = photoAsset
+        return cell
     }
 }
 
