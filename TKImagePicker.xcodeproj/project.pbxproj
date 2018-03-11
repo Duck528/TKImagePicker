@@ -19,6 +19,14 @@
 		FC7BE9B920545A6700D36655 /* TKImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7BE9562054470700D36655 /* TKImagePicker.framework */; };
 		FC7BE9BA20545A6700D36655 /* TKImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC7BE9562054470700D36655 /* TKImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC7BE9C020545B3900D36655 /* TKBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7BE9BF20545B3900D36655 /* TKBundle.swift */; };
+		FC7BE9C220545F7200D36655 /* TKAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7BE9C120545F7200D36655 /* TKAlbum.swift */; };
+		FC7BE9C52054600200D36655 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7BE9C42054600200D36655 /* SnapKit.framework */; };
+		FCE9F1662055540A00C256B9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE9F1652055540A00C256B9 /* Extensions.swift */; };
+		FCE9F1682055613100C256B9 /* TKAlbum.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE9F1672055613100C256B9 /* TKAlbum.storyboard */; };
+		FCE9F16A2055614600C256B9 /* TKAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE9F1692055614600C256B9 /* TKAlbumViewController.swift */; };
+		FCE9F16D20556BC700C256B9 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCE9F16C20556BC700C256B9 /* NotoSans-Regular.ttf */; };
+		FCE9F16F20556BD700C256B9 /* NotoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCE9F16E20556BD700C256B9 /* NotoSans-SemiBold.ttf */; };
+		FCE9F17120556BFC00C256B9 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCE9F17020556BFC00C256B9 /* NotoSans-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +68,14 @@
 		FC7BE9AE2054587800D36655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC7BE9B72054594E00D36655 /* TKImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKImagePickerViewController.swift; sourceTree = "<group>"; };
 		FC7BE9BF20545B3900D36655 /* TKBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKBundle.swift; sourceTree = "<group>"; };
+		FC7BE9C120545F7200D36655 /* TKAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAlbum.swift; sourceTree = "<group>"; };
+		FC7BE9C42054600200D36655 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		FCE9F1652055540A00C256B9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FCE9F1672055613100C256B9 /* TKAlbum.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TKAlbum.storyboard; sourceTree = "<group>"; };
+		FCE9F1692055614600C256B9 /* TKAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKAlbumViewController.swift; sourceTree = "<group>"; };
+		FCE9F16C20556BC700C256B9 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
+		FCE9F16E20556BD700C256B9 /* NotoSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		FCE9F17020556BFC00C256B9 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC7BE9C52054600200D36655 /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +104,7 @@
 				FC7BE9582054470700D36655 /* TKImagePicker */,
 				FC7BE9A12054587800D36655 /* TKTesterApp */,
 				FC7BE9572054470700D36655 /* Products */,
+				FC7BE9C32054600200D36655 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,6 +135,9 @@
 		FC7BE963205447BA00D36655 /* TKAlbum */ = {
 			isa = PBXGroup;
 			children = (
+				FC7BE9C120545F7200D36655 /* TKAlbum.swift */,
+				FCE9F1672055613100C256B9 /* TKAlbum.storyboard */,
+				FCE9F1692055614600C256B9 /* TKAlbumViewController.swift */,
 			);
 			path = TKAlbum;
 			sourceTree = "<group>";
@@ -131,6 +152,7 @@
 		FC7BE9652054487200D36655 /* TKResources */ = {
 			isa = PBXGroup;
 			children = (
+				FCE9F16B20556B4C00C256B9 /* Fonts */,
 				FC7BE966205448E100D36655 /* TKImagePicker.xcassets */,
 			);
 			path = TKResources;
@@ -153,8 +175,27 @@
 			isa = PBXGroup;
 			children = (
 				FC7BE9BF20545B3900D36655 /* TKBundle.swift */,
+				FCE9F1652055540A00C256B9 /* Extensions.swift */,
 			);
 			path = TKUtil;
+			sourceTree = "<group>";
+		};
+		FC7BE9C32054600200D36655 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC7BE9C42054600200D36655 /* SnapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCE9F16B20556B4C00C256B9 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FCE9F16E20556BD700C256B9 /* NotoSans-SemiBold.ttf */,
+				FCE9F17020556BFC00C256B9 /* NotoSans-Bold.ttf */,
+				FCE9F16C20556BC700C256B9 /* NotoSans-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +294,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCE9F17120556BFC00C256B9 /* NotoSans-Bold.ttf in Resources */,
+				FCE9F16D20556BC700C256B9 /* NotoSans-Regular.ttf in Resources */,
+				FCE9F16F20556BD700C256B9 /* NotoSans-SemiBold.ttf in Resources */,
+				FCE9F1682055613100C256B9 /* TKAlbum.storyboard in Resources */,
 				FC7BE967205448E100D36655 /* TKImagePicker.xcassets in Resources */,
 				FC7BE9622054477B00D36655 /* TKImagePicker.storyboard in Resources */,
 			);
@@ -276,7 +321,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC7BE9C020545B3900D36655 /* TKBundle.swift in Sources */,
+				FC7BE9C220545F7200D36655 /* TKAlbum.swift in Sources */,
+				FCE9F16A2055614600C256B9 /* TKAlbumViewController.swift in Sources */,
 				FC7BE9B82054594E00D36655 /* TKImagePickerViewController.swift in Sources */,
+				FCE9F1662055540A00C256B9 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +491,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = TKImagePicker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -466,6 +518,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = TKImagePicker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

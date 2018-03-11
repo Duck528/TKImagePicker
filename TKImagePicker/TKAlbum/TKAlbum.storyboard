@@ -1,7 +1,100 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <customFonts key="customFonts">
+        <array key="NotoSans-Regular.ttf">
+            <string>NotoSans-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Album View Controller-->
+        <scene sceneID="q03-lD-JP1">
+            <objects>
+                <viewController id="6d6-fR-cxY" customClass="TKAlbumViewController" customModule="TKImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UzQ-O2-Dl0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FwW-Pl-WFy">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dZK-CJ-DPl">
+                                    <size key="itemSize" width="375" height="90"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AlbumCell" id="31g-C4-GeA" customClass="TKAlbumCell" customModule="TKImagePicker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZUz-Vu-2MJ">
+                                                    <rect key="frame" x="28" y="10" width="70" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="70" id="4RI-c4-znC"/>
+                                                        <constraint firstAttribute="width" constant="70" id="xx8-GW-a5s"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Roll" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ApM-2I-6f2">
+                                                    <rect key="frame" x="116" y="28" width="92" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBt-0W-vlO">
+                                                    <rect key="frame" x="116" y="54" width="24.5" height="19.5"/>
+                                                    <fontDescription key="fontDescription" name="NotoSans-Regular" family="Noto Sans" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="ZUz-Vu-2MJ" firstAttribute="centerY" secondItem="31g-C4-GeA" secondAttribute="centerY" id="1eZ-2y-TUC"/>
+                                            <constraint firstItem="ApM-2I-6f2" firstAttribute="top" secondItem="31g-C4-GeA" secondAttribute="topMargin" constant="20" id="4MI-4z-WJe"/>
+                                            <constraint firstItem="EBt-0W-vlO" firstAttribute="top" secondItem="ApM-2I-6f2" secondAttribute="bottom" constant="5" id="HyR-gt-E3C"/>
+                                            <constraint firstItem="ZUz-Vu-2MJ" firstAttribute="leading" secondItem="31g-C4-GeA" secondAttribute="leadingMargin" constant="20" id="MZ9-7L-n4h"/>
+                                            <constraint firstItem="EBt-0W-vlO" firstAttribute="leading" secondItem="ZUz-Vu-2MJ" secondAttribute="trailing" constant="18" id="R9u-Os-rK6"/>
+                                            <constraint firstItem="ApM-2I-6f2" firstAttribute="leading" secondItem="ZUz-Vu-2MJ" secondAttribute="trailing" constant="18" id="iHd-cG-PpC"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="ZUz-Vu-2MJ" id="SeI-7p-DaS"/>
+                                            <outlet property="numberOfPhotosLabel" destination="EBt-0W-vlO" id="RLQ-WA-t6p"/>
+                                            <outlet property="titleLabel" destination="ApM-2I-6f2" id="W9F-CR-Ftf"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Fmi-Po-xUo" firstAttribute="trailing" secondItem="FwW-Pl-WFy" secondAttribute="trailing" id="8k8-0h-qoa"/>
+                            <constraint firstItem="FwW-Pl-WFy" firstAttribute="leading" secondItem="Fmi-Po-xUo" secondAttribute="leading" id="9Ms-VT-yFA"/>
+                            <constraint firstItem="FwW-Pl-WFy" firstAttribute="top" secondItem="Fmi-Po-xUo" secondAttribute="top" id="LmH-J2-1my"/>
+                            <constraint firstItem="Fmi-Po-xUo" firstAttribute="bottom" secondItem="FwW-Pl-WFy" secondAttribute="bottom" id="vh5-x7-zWq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Fmi-Po-xUo"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="FwW-Pl-WFy" id="F4e-eO-x9u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Yr-bw-oz4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-415.19999999999999" y="34.632683658170919"/>
+        </scene>
+    </scenes>
 </document>

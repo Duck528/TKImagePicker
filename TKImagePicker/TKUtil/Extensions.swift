@@ -7,3 +7,14 @@
 //
 
 import Foundation
+import Photos
+
+
+extension PHFetchOptions {
+    
+    static func sortByTime() -> PHFetchOptions {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        return fetchOptions
+    }
+}

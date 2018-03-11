@@ -7,13 +7,19 @@
 //
 
 import UIKit
+import SnapKit
 
 public class TKImagePickerViewController: UIViewController {
-
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var albumLabel: UIButton!
+    @IBOutlet weak var albumArrowIndicatorView: UIImageView!
+    @IBOutlet weak var previewImageView: UIImageView!
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     public static func create() -> TKImagePickerViewController {
