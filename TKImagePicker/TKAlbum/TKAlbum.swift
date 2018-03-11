@@ -69,4 +69,14 @@ class TKAlbumCollection {
         
         onCompletion?()
     }
+    
+    func album(at indexPath: IndexPath) -> TKAlbum? {
+        guard indexPath.item >= 0, indexPath.item < photoAlbums.count else { return nil }
+        return photoAlbums[indexPath.item]
+    }
+    
+    func checkedPhotoAsset(at indexPath: IndexPath) -> PHAsset? {
+        guard indexPath.item >= 0, indexPath.item < checkedPhotoAssets.count else { return nil }
+        return checkedPhotoAssets[indexPath.item]
+    }
 }
