@@ -67,6 +67,7 @@ class TKAlbumCollection {
             .filter { $0.estimatedAssetCount > 0 }
             .forEach { photoAlbums.append(TKAlbum.parseTo($0)) }
         
+        currentAlbum = photoAlbums.first
         onCompletion?()
     }
     
