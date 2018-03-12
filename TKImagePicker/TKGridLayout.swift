@@ -18,6 +18,10 @@ class TKGridLayout: UICollectionViewLayout {
         return collectionView.bounds.width - (inset.left + inset.right)
     }
     
+    var verticalDistance: CGFloat {
+        return attributeSize.height + interItemVerticalSpacing
+    }
+    
     var contentHeight: CGFloat = 0
     
     @IBInspectable var numberOfAttributesInRow = 4
@@ -34,8 +38,8 @@ class TKGridLayout: UICollectionViewLayout {
         return CGSize(width: contentWidth, height: contentHeight)
     }
     
-    private func newLineForAttribute(_ distance: CGFloat) {
-        contentHeight += distance
+    private func newLineForAttribute() {
+        contentHeight += verticalDistance
     }
     
     override func prepare() {
@@ -43,14 +47,14 @@ class TKGridLayout: UICollectionViewLayout {
         
         var leftSpacing = collectionView.contentInset.left
         var verticalSpacing = collectionView.contentInset.top
+        let numberOfItems = collectionView.numberOfItems(inSection: 0)
         
-        for i in 0 ..< collectionView.numberOfItems(inSection: 0) {
+        for i in 0 ..< numberOfItems {
             
             if i % numberOfAttributesInRow == 0 {
                 leftSpacing = collectionView.contentInset.left
-                let distance = attributeSize.height + interItemVerticalSpacing
-                verticalSpacing += distance
-                newLineForAttribute(distance)
+                verticalSpacing += verticalDistance
+                newLineForAttribute()
             }
             
             let attribute = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: i, section: 0))
@@ -59,6 +63,8 @@ class TKGridLayout: UICollectionViewLayout {
             
             leftSpacing += (attributeSize.width + interItemHorizontalSpacing)
         }
+        
+        if numberOfItems % numberOfAttributesInRow > 0 { newLineForAttribute() }
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
