@@ -32,13 +32,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bM5-bQ-Ly8" userLabel="Navigation View">
                                         <rect key="frame" x="0.0" y="20" width="375" height="56"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thB-oS-uD3" userLabel="Underline View">
-                                                <rect key="frame" x="0.0" y="55" width="375" height="1"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="ptF-Qx-O7Y"/>
-                                                </constraints>
-                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8XE-gt-6Uf">
                                                 <rect key="frame" x="20" y="14.5" width="53" height="27"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
@@ -63,6 +56,13 @@
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                                                 <state key="normal" title="ADD"/>
                                             </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thB-oS-uD3" userLabel="Underline View">
+                                                <rect key="frame" x="0.0" y="55" width="375" height="1"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="ptF-Qx-O7Y"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -126,24 +126,19 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UaR-DV-m27">
                                 <rect key="frame" x="0.0" y="451" width="375" height="216"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JkX-fE-R2l">
-                                    <size key="itemSize" width="94" height="93.75"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
+                                <collectionViewLayout key="collectionViewLayout" id="MVM-FO-Eik" customClass="TKGridLayout" customModule="TKImagePicker" customModuleProvider="target"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="Vic-tw-vhd" customClass="TKPhotoCell" customModule="TKImagePicker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="94" height="93.75"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="93.75" height="93.75"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="94" height="93.75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="93.75" height="93.75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uar-tk-W1G">
                                                     <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="asE-7T-pff">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="asE-7T-pff">
                                                             <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vLe-Q0-cxa" userLabel="Blur View">
@@ -179,6 +174,7 @@
                                             <constraint firstAttribute="trailing" secondItem="Uar-tk-W1G" secondAttribute="trailing" id="u2Z-J6-ftU"/>
                                             <constraint firstAttribute="bottom" secondItem="Uar-tk-W1G" secondAttribute="bottom" id="uZy-W7-IzI"/>
                                         </constraints>
+                                        <size key="customSize" width="93.75" height="93.75"/>
                                         <connections>
                                             <outlet property="blurView" destination="vLe-Q0-cxa" id="mCC-8i-iOi"/>
                                             <outlet property="imageView" destination="asE-7T-pff" id="saj-Le-BnK"/>
@@ -214,6 +210,7 @@
                         <outlet property="albumLabel" destination="zTQ-RB-y5w" id="RsJ-CN-nlg"/>
                         <outlet property="cancelButton" destination="8XE-gt-6Uf" id="bvU-Ma-1Em"/>
                         <outlet property="collectionView" destination="UaR-DV-m27" id="ufx-iC-7Le"/>
+                        <outlet property="gridLayout" destination="MVM-FO-Eik" id="kpW-NF-WQg"/>
                         <outlet property="previewImageView" destination="34a-L5-I3q" id="DCT-aB-l8b"/>
                     </connections>
                 </viewController>

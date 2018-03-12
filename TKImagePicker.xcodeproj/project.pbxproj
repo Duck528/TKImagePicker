@@ -29,6 +29,7 @@
 		FCE9F1772055A22900C256B9 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7BE9C42054600200D36655 /* SnapKit.framework */; };
 		FCE9F1792055A50C00C256B9 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7BE9C42054600200D36655 /* SnapKit.framework */; };
 		FCE9F17A2055A50C00C256B9 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC7BE9C42054600200D36655 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FCE9F1C82056E06F00C256B9 /* TKGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE9F1C72056E06F00C256B9 /* TKGridLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		FCE9F16C20556BC700C256B9 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
 		FCE9F16E20556BD700C256B9 /* NotoSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		FCE9F17020556BFC00C256B9 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		FCE9F1C72056E06F00C256B9 /* TKGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKGridLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				FC7BE95A2054470700D36655 /* Info.plist */,
 				FC7BE9612054477B00D36655 /* TKImagePicker.storyboard */,
 				FC7BE9B72054594E00D36655 /* TKImagePickerViewController.swift */,
+				FCE9F1C72056E06F00C256B9 /* TKGridLayout.swift */,
 			);
 			path = TKImagePicker;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				FC7BE9C220545F7200D36655 /* TKAlbum.swift in Sources */,
 				FCE9F16A2055614600C256B9 /* TKAlbumViewController.swift in Sources */,
 				FC7BE9B82054594E00D36655 /* TKImagePickerViewController.swift in Sources */,
+				FCE9F1C82056E06F00C256B9 /* TKGridLayout.swift in Sources */,
 				FCE9F1662055540A00C256B9 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

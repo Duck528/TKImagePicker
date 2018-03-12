@@ -13,6 +13,7 @@ import Photos
 public class TKImagePickerViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var gridLayout: TKGridLayout!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var albumLabel: UIButton!
