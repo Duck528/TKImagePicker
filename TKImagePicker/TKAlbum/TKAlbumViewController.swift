@@ -10,11 +10,18 @@ import UIKit
 import Photos
 
 
+protocol TKAlbumsViewControllerDelegate: class {
+    func albumsViewController(_ viewController: UIViewController, didSelectItemAt indexPath: IndexPath)
+}
+
+
 class TKAlbumsViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    weak var delegate: TKAlbumsViewControllerDelegate?
     var albumCollection: TKAlbumCollection?
+    
     private let cellIdentifier = "AlbumCell"
     
     public static func create() -> TKAlbumsViewController {
@@ -51,6 +58,10 @@ extension TKAlbumsViewController: UICollectionViewDataSource {
 }
 
 extension TKAlbumsViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.albumsViewController(self, didSelectItemAt: indexPath)
+    }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

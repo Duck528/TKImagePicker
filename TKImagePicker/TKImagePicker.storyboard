@@ -140,7 +140,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uar-tk-W1G">
                                                     <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="asE-7T-pff">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="asE-7T-pff">
                                                             <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vLe-Q0-cxa" userLabel="Blur View">
@@ -217,6 +217,10 @@
                         <outlet property="previewImageView" destination="34a-L5-I3q" id="DCT-aB-l8b"/>
                     </connections>
                 </viewController>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="egP-jq-aM0">
+                    <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdK-Pi-yja" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="191.19999999999999" y="59.820089955022496"/>

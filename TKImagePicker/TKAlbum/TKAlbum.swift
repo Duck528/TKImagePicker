@@ -54,6 +54,8 @@ class TKAlbumCollection {
     var numberOfPhotoAlbums: Int { return photoAlbums.count }
     var checkedPhotoAssets: [PHAsset] = []
     
+    var albumSelected: ((TKAlbum) -> ())?
+    
     func fetchPhotoAlbums(onCompletion: @escaping (() -> ())) {
         DispatchQueue.global().async { [weak self] in
             guard let `self` = self else { return }
@@ -76,6 +78,12 @@ class TKAlbumCollection {
                 onCompletion()
             }
         }
+    }
+    
+    func selectAlbum(at indexPath: IndexPath) {
+        guard let selectedAlbum = album(at: indexPath) else { return }
+        currentAlbum = selectedAlbum
+        albumSelected?(selectedAlbum)
     }
     
     func album(at indexPath: IndexPath) -> TKAlbum? {

@@ -25,6 +25,7 @@ public class TKImagePickerViewController: UIViewController {
     private let cellIdentifier = "PhotoCell"
     
     var albumCollection = TKAlbumCollection()
+    var albumsPresented = false
     
     public static func create() -> TKImagePickerViewController {
         let sb = UIStoryboard(name: "TKImagePicker", bundle: TKBundle.bundle())
@@ -33,6 +34,7 @@ public class TKImagePickerViewController: UIViewController {
     
     lazy var albumsViewController: TKAlbumsViewController = {
         let vc = TKAlbumsViewController.create()
+        vc.delegate = self
         vc.albumCollection = albumCollection
         return vc
     }()
@@ -76,13 +78,23 @@ public class TKImagePickerViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        setupAlbums()
+    }
+    
+    private func setupAlbums() {
+        albumCollection.albumSelected = { [weak self] _ in
+            self?.collectionView.reloadData()
+        }
         albumCollection.fetchPhotoAlbums(onCompletion: { [weak self] in
             self?.collectionView.reloadData()
         })
     }
     
     @IBAction func albumButtonTapped(_ sender: UIButton) {
-        presentAlbums()
+        if albumsPresented { dismissAlbums() }
+        else { presentAlbums() }
+        
+        albumsPresented = !albumsPresented
     }
 }
 
@@ -124,6 +136,15 @@ extension TKImagePickerViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
+extension TKImagePickerViewController: TKAlbumsViewControllerDelegate {
+    
+    func albumsViewController(_ viewController: UIViewController, didSelectItemAt indexPath: IndexPath) {
+        albumCollection.selectAlbum(at: indexPath)
+        dismissAlbums()
+    }
+}
+
+
 class TKPhotoCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
@@ -149,8 +170,10 @@ class TKPhotoCell: UICollectionViewCell {
         guard let model = model else { return }
         switch model.mediaType {
         case .image:
+            videoPlayTimeLabel.isHidden = true
             loadPhoto()
         case .video:
+            videoPlayTimeLabel.isHidden = false
             loadVideo()
         default:
             break
