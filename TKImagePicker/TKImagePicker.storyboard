@@ -210,6 +210,7 @@
                         <outlet property="addButton" destination="XeQ-YZ-98y" id="DjB-3u-md8"/>
                         <outlet property="albumArrowIndicatorView" destination="NY3-bQ-7uh" id="SdZ-oY-wB5"/>
                         <outlet property="albumButton" destination="zTQ-RB-y5w" id="dHs-6i-a2K"/>
+                        <outlet property="albumTitleLabel" destination="fCX-bm-0Br" id="X6r-vl-3yJ"/>
                         <outlet property="cancelButton" destination="8XE-gt-6Uf" id="bvU-Ma-1Em"/>
                         <outlet property="collectionView" destination="UaR-DV-m27" id="ufx-iC-7Le"/>
                         <outlet property="gridLayout" destination="MVM-FO-Eik" id="kpW-NF-WQg"/>

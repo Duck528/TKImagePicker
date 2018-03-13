@@ -11,6 +11,13 @@ import SnapKit
 import Photos
 
 
+protocol TKImagePickerViewControllerDelegate: class {
+    
+    func imagePickerViewControllerDidCancel(_ imagePicker: TKImagePickerViewController)
+    func imagePickerViewControllerDidAdd(_ imagePicker: TKImagePickerViewController, image: UIImage)
+}
+
+
 public class TKImagePickerViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -21,6 +28,7 @@ public class TKImagePickerViewController: UIViewController {
     @IBOutlet weak var albumArrowIndicatorView: UIImageView!
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var navigationAreaView: UIView!
+    @IBOutlet weak var albumTitleLabel: UILabel!
     
     private let cellIdentifier = "PhotoCell"
     
@@ -63,6 +71,8 @@ public class TKImagePickerViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             guard let `self` = self else { return }
             self.albumsViewController.view.frame.origin = self.albumsTopOrigin
+            self.cancelButton.alpha = 0
+            self.addButton.alpha = 0
         })
     }
     
@@ -70,6 +80,8 @@ public class TKImagePickerViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             guard let `self` = self else { return }
             self.albumsViewController.view.frame.origin = self.albumsBottomOrigin
+            self.cancelButton.alpha = 1
+            self.addButton.alpha = 1
         }, completion: { [weak self] _ in
             guard let `self` = self else { return }
             self.remove(childViewController: self.albumsViewController)
@@ -82,7 +94,8 @@ public class TKImagePickerViewController: UIViewController {
     }
     
     private func setupAlbums() {
-        albumCollection.albumSelected = { [weak self] _ in
+        albumCollection.albumSelected = { [weak self] album in
+            self?.albumTitleLabel.text = album.albumTitle
             self?.collectionView.reloadData()
         }
         albumCollection.fetchPhotoAlbums(onCompletion: { [weak self] in
