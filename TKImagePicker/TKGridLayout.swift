@@ -51,7 +51,7 @@ class TKGridLayout: UICollectionViewLayout {
         
         for i in 0 ..< numberOfItems {
             
-            if i % numberOfAttributesInRow == 0 {
+            if i % numberOfAttributesInRow == 0, i > 0 {
                 leftSpacing = collectionView.contentInset.left
                 verticalSpacing += verticalDistance
                 newLineForAttribute()

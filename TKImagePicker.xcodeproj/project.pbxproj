@@ -142,8 +142,8 @@
 		FC7BE963205447BA00D36655 /* TKAlbum */ = {
 			isa = PBXGroup;
 			children = (
-				FC7BE9C120545F7200D36655 /* TKAlbum.swift */,
 				FCE9F1672055613100C256B9 /* TKAlbum.storyboard */,
+				FC7BE9C120545F7200D36655 /* TKAlbum.swift */,
 				FCE9F1692055614600C256B9 /* TKAlbumViewController.swift */,
 			);
 			path = TKAlbum;

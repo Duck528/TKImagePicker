@@ -54,22 +54,28 @@ class TKAlbumCollection {
     var numberOfPhotoAlbums: Int { return photoAlbums.count }
     var checkedPhotoAssets: [PHAsset] = []
     
-    func fetchPhotoAlbums(onCompletion: (() -> ())?) {
-        let fetchedAllPhotoAssetCollections = PHAssetCollection.fetchAssetCollections(
-            with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
-        let allPhotoAlbum = fetchedAllPhotoAssetCollections.firstObject
-        if let allPhotoAlbum = allPhotoAlbum {
-            photoAlbums.append(TKAlbum.parseTo(allPhotoAlbum, title: "All Photo"))
+    func fetchPhotoAlbums(onCompletion: @escaping (() -> ())) {
+        DispatchQueue.global().async { [weak self] in
+            guard let `self` = self else { return }
+            
+            let fetchedAllPhotoAssetCollections = PHAssetCollection.fetchAssetCollections(
+                with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
+            let allPhotoAlbum = fetchedAllPhotoAssetCollections.firstObject
+            if let allPhotoAlbum = allPhotoAlbum {
+                self.photoAlbums.append(TKAlbum.parseTo(allPhotoAlbum, title: "All Photo"))
+            }
+            
+            let fetchedPhotoAssetCollections = PHAssetCollection.fetchAssetCollections(
+                with: .album, subtype: .albumRegular, options: nil)
+            fetchedPhotoAssetCollections.objects(at: IndexSet(0 ..< fetchedPhotoAssetCollections.count))
+                .filter { $0.estimatedAssetCount > 0 }
+                .forEach { self.photoAlbums.append(TKAlbum.parseTo($0)) }
+            
+            self.currentAlbum = self.photoAlbums.first
+            DispatchQueue.main.async {
+                onCompletion()
+            }
         }
-        
-        let fetchedPhotoAssetCollections = PHAssetCollection.fetchAssetCollections(
-            with: .album, subtype: .albumRegular, options: nil)
-        fetchedPhotoAssetCollections.objects(at: IndexSet(0 ..< fetchedPhotoAssetCollections.count))
-            .filter { $0.estimatedAssetCount > 0 }
-            .forEach { photoAlbums.append(TKAlbum.parseTo($0)) }
-        
-        currentAlbum = photoAlbums.first
-        onCompletion?()
     }
     
     func album(at indexPath: IndexPath) -> TKAlbum? {
