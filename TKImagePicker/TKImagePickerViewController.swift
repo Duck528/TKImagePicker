@@ -10,19 +10,68 @@ import UIKit
 import SnapKit
 import Photos
 
+
 public class TKImagePickerViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var gridLayout: TKGridLayout!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var albumLabel: UIButton!
+    @IBOutlet weak var albumButton: UIButton!
     @IBOutlet weak var albumArrowIndicatorView: UIImageView!
     @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var navigationAreaView: UIView!
+    
+    private let cellIdentifier = "PhotoCell"
     
     var albumCollection = TKAlbumCollection()
     
-    private let cellIdentifier = "PhotoCell"
+    public static func create() -> TKImagePickerViewController {
+        let sb = UIStoryboard(name: "TKImagePicker", bundle: TKBundle.bundle())
+        return sb.instantiateViewController(withIdentifier: "previewImagePicker") as! TKImagePickerViewController
+    }
+    
+    lazy var albumsViewController: TKAlbumsViewController = {
+        let vc = TKAlbumsViewController.create()
+        return vc
+    }()
+    
+    lazy var albumsSize: CGSize = {
+        let height = UIScreen.main.bounds.height - navigationAreaView.frame.height
+        return CGSize(width: UIScreen.main.bounds.width, height: height)
+    }()
+    
+    lazy var albumsBottomOrigin: CGPoint = {
+        let point = CGPoint(x: UIScreen.main.bounds.minX, y: UIScreen.main.bounds.maxY)
+        return point
+    }()
+    
+    lazy var albumsTopOrigin: CGPoint = {
+        let pivotFrame = navigationAreaView.frame
+        let point = CGPoint(x: pivotFrame.minX, y: pivotFrame.maxY)
+        return point
+    }()
+    
+    
+    func presentAlbums() {
+        let fromFrame = CGRect(origin: albumsBottomOrigin, size: albumsSize)
+        add(childViewController: albumsViewController, frame: fromFrame)
+        
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            guard let `self` = self else { return }
+            self.albumsViewController.view.frame.origin = self.albumsTopOrigin
+        })
+    }
+    
+    func dismissAlbums() {
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            guard let `self` = self else { return }
+            self.albumsViewController.view.frame.origin = self.albumsBottomOrigin
+        }, completion: { [weak self] _ in
+            guard let `self` = self else { return }
+            self.remove(childViewController: self.albumsViewController)
+        })
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +80,8 @@ public class TKImagePickerViewController: UIViewController {
         })
     }
     
-    public static func create() -> TKImagePickerViewController {
-        let sb = UIStoryboard(name: "TKImagePicker", bundle: TKBundle.bundle())
-        return sb.instantiateViewController(withIdentifier: "previewImagePicker") as! TKImagePickerViewController
+    @IBAction func albumButtonTapped(_ sender: UIButton) {
+        presentAlbums()
     }
 }
 

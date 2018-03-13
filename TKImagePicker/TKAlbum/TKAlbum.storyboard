@@ -18,7 +18,7 @@
         <!--Albums View Controller-->
         <scene sceneID="q03-lD-JP1">
             <objects>
-                <viewController id="6d6-fR-cxY" customClass="TKAlbumsViewController" customModule="TKImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Albums" id="6d6-fR-cxY" customClass="TKAlbumsViewController" customModule="TKImagePicker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UzQ-O2-Dl0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

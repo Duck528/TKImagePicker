@@ -28,3 +28,21 @@ extension Int {
         return formatter.string(from: NSNumber(value: self))
     }
 }
+
+
+extension UIViewController {
+    
+    func add(childViewController: UIViewController, frame: CGRect) {
+        willMove(toParentViewController: self)
+        addChildViewController(childViewController)
+        view.addSubview(childViewController.view)
+        childViewController.view.frame = frame
+        didMove(toParentViewController: self)
+    }
+    
+    func remove(childViewController: UIViewController) {
+        willMove(toParentViewController: self)
+        childViewController.removeFromParentViewController()
+        didMove(toParentViewController: self)
+    }
+}

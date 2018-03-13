@@ -16,6 +16,10 @@ class TKAlbumsViewController: UIViewController {
     var albumCollection: TKAlbumCollection?
     private let cellIdentifier = "AlbumCell"
     
+    public static func create() -> TKAlbumsViewController {
+        let sb = UIStoryboard(name: "TKAlbum", bundle: TKBundle.bundle())
+        return sb.instantiateViewController(withIdentifier: "Albums") as! TKAlbumsViewController
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

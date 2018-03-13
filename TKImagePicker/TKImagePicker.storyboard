@@ -50,6 +50,9 @@
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTQ-RB-y5w">
                                                 <rect key="frame" x="141.5" y="0.0" width="92.5" height="55"/>
+                                                <connections>
+                                                    <action selector="albumButtonTapped:" destination="c0y-kn-bRr" eventType="touchUpInside" id="gBO-fy-6B1"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XeQ-YZ-98y">
                                                 <rect key="frame" x="325" y="14.5" width="30" height="27"/>
@@ -207,10 +210,11 @@
                     <connections>
                         <outlet property="addButton" destination="XeQ-YZ-98y" id="DjB-3u-md8"/>
                         <outlet property="albumArrowIndicatorView" destination="NY3-bQ-7uh" id="SdZ-oY-wB5"/>
-                        <outlet property="albumLabel" destination="zTQ-RB-y5w" id="RsJ-CN-nlg"/>
+                        <outlet property="albumButton" destination="zTQ-RB-y5w" id="dHs-6i-a2K"/>
                         <outlet property="cancelButton" destination="8XE-gt-6Uf" id="bvU-Ma-1Em"/>
                         <outlet property="collectionView" destination="UaR-DV-m27" id="ufx-iC-7Le"/>
                         <outlet property="gridLayout" destination="MVM-FO-Eik" id="kpW-NF-WQg"/>
+                        <outlet property="navigationAreaView" destination="iS0-18-CQB" id="QTL-7a-bdg"/>
                         <outlet property="previewImageView" destination="34a-L5-I3q" id="DCT-aB-l8b"/>
                     </connections>
                 </viewController>
