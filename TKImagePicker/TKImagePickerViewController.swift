@@ -33,6 +33,7 @@ public class TKImagePickerViewController: UIViewController {
     
     lazy var albumsViewController: TKAlbumsViewController = {
         let vc = TKAlbumsViewController.create()
+        vc.albumCollection = albumCollection
         return vc
     }()
     

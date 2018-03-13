@@ -15,6 +15,9 @@ class TKAlbum {
     var albumTitle = ""
     var photoAssets: [PHAsset]
     var numberOfPhotoAssets: Int { return photoAssets.count }
+    var thumbnailPhotoAsset: PHAsset? {
+        return photoAssets.first
+    }
     
     init(photoAssets: [PHAsset]) {
         self.photoAssets = photoAssets

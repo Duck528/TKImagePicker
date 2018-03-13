@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 
 class TKAlbumsViewController: UIViewController {
@@ -50,8 +51,11 @@ extension TKAlbumsViewController: UICollectionViewDataSource {
 }
 
 extension TKAlbumsViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         return CGSize(width: UIScreen.main.bounds.width, height: 90)
     }
 }
@@ -73,5 +77,17 @@ class TKAlbumCell: UICollectionViewCell {
         guard let model = model else { return }
         titleLabel.text = model.albumTitle
         numberOfPhotosLabel.text = model.numberOfPhotoAssets.formattedByDecimal()
+        loadPhoto()
+    }
+    
+    private func loadPhoto() {
+        guard let model = model, let thumbnailPhotoAsset = model.thumbnailPhotoAsset else { return }
+        PHImageManager.default().requestImage(
+            for: thumbnailPhotoAsset, targetSize: bounds.size,
+            contentMode: .aspectFill, options: nil, resultHandler: { [weak self] image, _ in
+                DispatchQueue.main.async {
+                    self?.imageView.image = image
+                }
+        })
     }
 }
