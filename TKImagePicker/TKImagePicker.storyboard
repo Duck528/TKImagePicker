@@ -38,6 +38,9 @@
                                                 <state key="normal" title="CANCEL">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="cancelButtonTapped" destination="c0y-kn-bRr" eventType="touchUpInside" id="aji-kl-erM"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAMERA ROLL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCX-bm-0Br">
                                                 <rect key="frame" x="141.5" y="21" width="92.5" height="15"/>
@@ -58,6 +61,9 @@
                                                 <rect key="frame" x="325" y="14.5" width="30" height="27"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                                                 <state key="normal" title="ADD"/>
+                                                <connections>
+                                                    <action selector="addButtonTapped" destination="c0y-kn-bRr" eventType="touchUpInside" id="MZG-T7-keA"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thB-oS-uD3" userLabel="Underline View">
                                                 <rect key="frame" x="0.0" y="55" width="375" height="1"/>

@@ -14,7 +14,19 @@ class ViewController: UIViewController {
 
     @IBAction func imagePickerButtonTapped() {
         let vc = TKImagePickerViewController.create()
+        vc.delegate = self
         present(vc, animated: true, completion: nil)
     }
 }
 
+
+extension ViewController: TKImagePickerViewControllerDelegate {
+    
+    func imagePickerViewControllerDidCancel(_ imagePicker: TKImagePickerViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerViewControllerDidAdd(_ imagePicker: TKImagePickerViewController, image: UIImage) {
+        dismiss(animated: true, completion: nil)
+    }
+}

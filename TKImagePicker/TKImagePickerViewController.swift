@@ -11,7 +11,7 @@ import SnapKit
 import Photos
 
 
-protocol TKImagePickerViewControllerDelegate: class {
+public protocol TKImagePickerViewControllerDelegate: class {
     
     func imagePickerViewControllerDidCancel(_ imagePicker: TKImagePickerViewController)
     func imagePickerViewControllerDidAdd(_ imagePicker: TKImagePickerViewController, image: UIImage)
@@ -31,6 +31,8 @@ public class TKImagePickerViewController: UIViewController {
     @IBOutlet weak var albumTitleLabel: UILabel!
     
     private let cellIdentifier = "PhotoCell"
+    
+    public weak var delegate: TKImagePickerViewControllerDelegate?
     
     var albumCollection = TKAlbumCollection()
     var albumsPresented = false
@@ -102,6 +104,15 @@ public class TKImagePickerViewController: UIViewController {
             self?.collectionView.reloadData()
         })
     }
+    
+    @IBAction func addButtonTapped() {
+        delegate?.imagePickerViewControllerDidCancel(self)
+    }
+    
+    @IBAction func cancelButtonTapped() {
+        delegate?.imagePickerViewControllerDidCancel(self)
+    }
+    
     
     @IBAction func albumButtonTapped(_ sender: UIButton) {
         if albumsPresented { dismissAlbums() }
