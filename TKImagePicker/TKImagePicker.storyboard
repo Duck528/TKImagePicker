@@ -132,7 +132,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UaR-DV-m27">
-                                <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                                <rect key="frame" x="0.0" y="452" width="375" height="215"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewLayout key="collectionViewLayout" id="MVM-FO-Eik" customClass="TKGridLayout" customModule="TKImagePicker" customModuleProvider="target"/>
                                 <cells>
@@ -203,7 +203,7 @@
                             <constraint firstItem="iS0-18-CQB" firstAttribute="top" secondItem="cuF-Wn-9AH" secondAttribute="top" id="JeF-96-8cu"/>
                             <constraint firstItem="CZl-SD-E4x" firstAttribute="trailing" secondItem="UaR-DV-m27" secondAttribute="trailing" id="ZJD-pm-Ysk"/>
                             <constraint firstItem="UaR-DV-m27" firstAttribute="leading" secondItem="CZl-SD-E4x" secondAttribute="leading" id="aUh-u7-j49"/>
-                            <constraint firstItem="UaR-DV-m27" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="bottom" id="pRD-Bw-Zvb"/>
+                            <constraint firstItem="UaR-DV-m27" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="bottom" constant="1" id="pRD-Bw-Zvb"/>
                             <constraint firstItem="CZl-SD-E4x" firstAttribute="top" secondItem="bM5-bQ-Ly8" secondAttribute="top" id="qP0-La-hrh"/>
                             <constraint firstItem="iS0-18-CQB" firstAttribute="leading" secondItem="CZl-SD-E4x" secondAttribute="leading" id="qhK-im-yKg"/>
                             <constraint firstItem="iS0-18-CQB" firstAttribute="trailing" secondItem="CZl-SD-E4x" secondAttribute="trailing" id="qlw-aT-tlS"/>

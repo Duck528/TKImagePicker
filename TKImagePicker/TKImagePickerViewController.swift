@@ -145,26 +145,35 @@ extension TKImagePickerViewController: UICollectionViewDataSource {
     }
 }
 
-extension TKImagePickerViewController: UICollectionViewDelegateFlowLayout {
-    
-    private func cellSize() -> CGSize {
-        let len = UIScreen.main.bounds.width / 4.0
-        return CGSize(width: len, height: len)
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView,
-                               layout collectionViewLayout: UICollectionViewLayout,
-                               sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return cellSize()
-    }
-}
-
 
 extension TKImagePickerViewController: TKAlbumsViewControllerDelegate {
     
     func albumsViewController(_ viewController: UIViewController, didSelectItemAt indexPath: IndexPath) {
         albumCollection.selectAlbum(at: indexPath)
         dismissAlbums()
+    }
+}
+
+
+extension TKImagePickerViewController: UICollectionViewDelegate {
+    
+    private func loadImage(at indexPath: IndexPath, size: CGSize, onSuccess: @escaping ((UIImage) -> ())) {
+        guard let phAsset = albumCollection.currentAlbum?.photo(at: indexPath) else { return }
+        PHImageManager.default().requestImage(
+            for: phAsset, targetSize: size,
+            contentMode: .aspectFill, options: nil,
+            resultHandler: { image, _ in
+                guard let image = image else { return }
+                DispatchQueue.main.async {
+                    onSuccess(image)
+                }
+        })
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        loadImage(at: indexPath, size: previewImageView.frame.size, onSuccess: { [weak self] image in
+            self?.previewImageView.image = image
+        })
     }
 }
 
