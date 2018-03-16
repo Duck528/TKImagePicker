@@ -38,8 +38,11 @@ public class TKImagePickerViewController: UIViewController {
     private var albumCollection = TKAlbumCollection()
     private var albumsPresented = false
     
-    private var previewPresented = false
+    private var previewPresented = true
     private var priorContentOffset: CGPoint?
+    
+    private let maxPreviewTopDistance: CGFloat = -376
+    private let needToCloseRatio: CGFloat = 0.7
     
     private lazy var topDistance: CGFloat = {
         return navigationBarView.bounds.height + previewAreaView.bounds.height
@@ -113,7 +116,21 @@ public class TKImagePickerViewController: UIViewController {
     }
     
     @objc private func movePreviewIfNeeded(_ panGestureRecognizer: UIPanGestureRecognizer) {
+        if !previewPresented { return }
+        
         let pointInView = panGestureRecognizer.location(in: view)
+        let distance = max(pointInView.y - topDistance, maxPreviewTopDistance)
+        let ratioScroll = abs(distance / topDistance)
+        
+        if panGestureRecognizer.state == .ended {
+            if ratioScroll > needToCloseRatio {
+                closePreview()
+            } else {
+                openPreview()
+            }
+            return
+        }
+        
         if collectionView.frame.contains(pointInView) {
             priorContentOffset = collectionView.contentOffset
             return
@@ -123,10 +140,33 @@ public class TKImagePickerViewController: UIViewController {
             collectionView.contentOffset = priorContentOffset
         }
         
-        let distance = pointInView.y - topDistance
         navigationBarView.snp.updateConstraints { (make) in
             make.top.equalToSuperview().offset(distance)
         }
+    }
+    
+    private func closePreview() {
+        navigationBarView.snp.updateConstraints { (make) in
+            make.top.equalToSuperview().offset(maxPreviewTopDistance)
+        }
+        
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            self?.view.layoutIfNeeded()
+        })
+        
+        previewPresented = false
+    }
+    
+    private func openPreview() {
+        navigationBarView.snp.updateConstraints { (make) in
+            make.top.equalToSuperview()
+        }
+        
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            self?.view.layoutIfNeeded()
+        })
+        
+        previewPresented = true
     }
     
     private func setupAlbums() {
@@ -151,9 +191,10 @@ public class TKImagePickerViewController: UIViewController {
     @IBAction func albumButtonTapped(_ sender: UIButton) {
         if albumsPresented { dismissAlbums() }
         else { presentAlbums() }
-        
         albumsPresented = !albumsPresented
     }
+    
+    public override var prefersStatusBarHidden: Bool { return true }
 }
 
 
