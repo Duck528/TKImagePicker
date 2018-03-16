@@ -39,6 +39,8 @@ public class TKImagePickerViewController: UIViewController {
     private var albumsPresented = false
     
     private var previewPresented = false
+    private var priorContentOffset: CGPoint?
+    
     private lazy var topDistance: CGFloat = {
         return navigationBarView.bounds.height + previewAreaView.bounds.height
     }()
@@ -113,12 +115,15 @@ public class TKImagePickerViewController: UIViewController {
     @objc private func movePreviewIfNeeded(_ panGestureRecognizer: UIPanGestureRecognizer) {
         let pointInView = panGestureRecognizer.location(in: view)
         if collectionView.frame.contains(pointInView) {
-            print("x")
+            priorContentOffset = collectionView.contentOffset
             return
         }
         
+        if let priorContentOffset = priorContentOffset {
+            collectionView.contentOffset = priorContentOffset
+        }
+        
         let distance = pointInView.y - topDistance
-        print("nav: \(navigationBarView.frame.height), prev: \(previewAreaView.frame.height)")
         navigationBarView.snp.updateConstraints { (make) in
             make.top.equalToSuperview().offset(distance)
         }
