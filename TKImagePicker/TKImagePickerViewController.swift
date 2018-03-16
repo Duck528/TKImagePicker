@@ -26,16 +26,22 @@ public class TKImagePickerViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var albumButton: UIButton!
     @IBOutlet weak var albumArrowIndicatorView: UIImageView!
-    @IBOutlet weak var previewImageView: UIImageView!
-    @IBOutlet weak var navigationAreaView: UIView!
     @IBOutlet weak var albumTitleLabel: UILabel!
+    @IBOutlet weak var previewAreaView: UIView!
+    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var navigationBarView: UIView!
     
     private let cellIdentifier = "PhotoCell"
     
     public weak var delegate: TKImagePickerViewControllerDelegate?
     
-    var albumCollection = TKAlbumCollection()
-    var albumsPresented = false
+    private var albumCollection = TKAlbumCollection()
+    private var albumsPresented = false
+    
+    private var previewPresented = false
+    private lazy var topDistance: CGFloat = {
+        return navigationBarView.bounds.height + previewAreaView.bounds.height
+    }()
     
     public static func create() -> TKImagePickerViewController {
         let sb = UIStoryboard(name: "TKImagePicker", bundle: TKBundle.bundle())
@@ -50,7 +56,7 @@ public class TKImagePickerViewController: UIViewController {
     }()
     
     lazy var albumsSize: CGSize = {
-        let height = UIScreen.main.bounds.height - navigationAreaView.frame.height
+        let height = UIScreen.main.bounds.height - navigationBarView.frame.height
         return CGSize(width: UIScreen.main.bounds.width, height: height)
     }()
     
@@ -60,7 +66,7 @@ public class TKImagePickerViewController: UIViewController {
     }()
     
     lazy var albumsTopOrigin: CGPoint = {
-        let pivotFrame = navigationAreaView.frame
+        let pivotFrame = navigationBarView.frame
         let point = CGPoint(x: pivotFrame.minX, y: pivotFrame.maxY)
         return point
     }()
@@ -92,7 +98,30 @@ public class TKImagePickerViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
         setupAlbums()
+    }
+    
+    private func setupViews() {
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(movePreviewIfNeeded(_:)))
+        panGestureRecognizer.delegate = self
+        collectionView.addGestureRecognizer(panGestureRecognizer)
+        
+        collectionView.contentInset.top = 1
+    }
+    
+    @objc private func movePreviewIfNeeded(_ panGestureRecognizer: UIPanGestureRecognizer) {
+        let pointInView = panGestureRecognizer.location(in: view)
+        if collectionView.frame.contains(pointInView) {
+            print("x")
+            return
+        }
+        
+        let distance = pointInView.y - topDistance
+        print("nav: \(navigationBarView.frame.height), prev: \(previewAreaView.frame.height)")
+        navigationBarView.snp.updateConstraints { (make) in
+            make.top.equalToSuperview().offset(distance)
+        }
     }
     
     private func setupAlbums() {
@@ -155,6 +184,14 @@ extension TKImagePickerViewController: TKAlbumsViewControllerDelegate {
 }
 
 
+extension TKImagePickerViewController: UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                                  shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
+
 extension TKImagePickerViewController: UICollectionViewDelegate {
     
     private func loadImage(at indexPath: IndexPath, size: CGSize, onSuccess: @escaping ((UIImage) -> ())) {
@@ -170,7 +207,8 @@ extension TKImagePickerViewController: UICollectionViewDelegate {
         })
     }
     
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView,
+                               didSelectItemAt indexPath: IndexPath) {
         loadImage(at: indexPath, size: previewImageView.frame.size, onSuccess: { [weak self] image in
             self?.previewImageView.image = image
         })
