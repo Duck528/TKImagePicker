@@ -30,6 +30,7 @@ public class TKImagePickerViewController: UIViewController {
     @IBOutlet weak var previewAreaView: UIView!
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var navigationBarView: UIView!
+    @IBOutlet weak var previewTapAreaView: UIView!
     
     private let cellIdentifier = "PhotoCell"
     
@@ -112,36 +113,43 @@ public class TKImagePickerViewController: UIViewController {
         panGestureRecognizer.delegate = self
         collectionView.addGestureRecognizer(panGestureRecognizer)
         
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPreviewIfNeeded(_:)))
+        previewTapAreaView.addGestureRecognizer(tapGestureRecognizer)
+        
         collectionView.contentInset.top = 1
+    }
+    
+    @objc private func openPreviewIfNeeded(_ tapGestureRecognizer: UITapGestureRecognizer) {
+        if !previewPresented { openPreview() }
     }
     
     @objc private func movePreviewIfNeeded(_ panGestureRecognizer: UIPanGestureRecognizer) {
         if !previewPresented { return }
         
         let pointInView = panGestureRecognizer.location(in: view)
-        let distance = max(pointInView.y - topDistance, maxPreviewTopDistance)
+        let distance = min(max(pointInView.y - topDistance, maxPreviewTopDistance), 0)
         let ratioScroll = abs(distance / topDistance)
         
-        if panGestureRecognizer.state == .ended {
+        switch panGestureRecognizer.state {
+        case .changed:
+            navigationBarView.snp.updateConstraints { (make) in
+                make.top.equalToSuperview().offset(distance)
+            }
+            
+            if let priorContentOffset = priorContentOffset, ratioScroll > 0 {
+                collectionView.contentOffset = priorContentOffset
+            }
+            
+            priorContentOffset = collectionView.contentOffset
+
+        case .ended:
             if ratioScroll > needToCloseRatio {
                 closePreview()
             } else {
                 openPreview()
             }
-            return
-        }
-        
-        if collectionView.frame.contains(pointInView) {
-            priorContentOffset = collectionView.contentOffset
-            return
-        }
-        
-        if let priorContentOffset = priorContentOffset {
-            collectionView.contentOffset = priorContentOffset
-        }
-        
-        navigationBarView.snp.updateConstraints { (make) in
-            make.top.equalToSuperview().offset(distance)
+        default:
+            break
         }
     }
     

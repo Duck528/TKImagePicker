@@ -108,15 +108,25 @@
                                             <constraint firstItem="34a-L5-I3q" firstAttribute="top" secondItem="faG-0t-rg6" secondAttribute="top" id="YrD-6R-mg6"/>
                                         </constraints>
                                     </scrollView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhA-fE-JyX" userLabel="Tap Area">
+                                        <rect key="frame" x="0.0" y="319" width="375" height="56"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="UXQ-mA-Fau"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="34a-L5-I3q" firstAttribute="height" secondItem="V41-j7-bou" secondAttribute="height" id="DYS-S0-eHl"/>
                                     <constraint firstItem="faG-0t-rg6" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="top" id="KOP-4O-cbJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="rhA-fE-JyX" secondAttribute="bottom" id="NoM-Ah-dKY"/>
                                     <constraint firstItem="faG-0t-rg6" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="PIX-9M-dIX"/>
                                     <constraint firstAttribute="bottom" secondItem="faG-0t-rg6" secondAttribute="bottom" id="SOV-lN-orw"/>
                                     <constraint firstAttribute="trailing" secondItem="faG-0t-rg6" secondAttribute="trailing" id="Th9-d8-ljf"/>
                                     <constraint firstAttribute="height" constant="375" id="W8D-rI-ukP"/>
+                                    <constraint firstItem="rhA-fE-JyX" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="dsW-nD-XCo"/>
+                                    <constraint firstAttribute="trailing" secondItem="rhA-fE-JyX" secondAttribute="trailing" id="hXd-xP-yF8"/>
                                     <constraint firstItem="34a-L5-I3q" firstAttribute="width" secondItem="V41-j7-bou" secondAttribute="width" id="s7J-Xw-YBE"/>
                                 </constraints>
                             </view>
@@ -211,6 +221,7 @@
                         <outlet property="navigationBarView" destination="bM5-bQ-Ly8" id="qg1-z4-0kX"/>
                         <outlet property="previewAreaView" destination="V41-j7-bou" id="aBx-wG-6Pv"/>
                         <outlet property="previewImageView" destination="34a-L5-I3q" id="DCT-aB-l8b"/>
+                        <outlet property="previewTapAreaView" destination="rhA-fE-JyX" id="Z6f-Fd-U3C"/>
                     </connections>
                 </viewController>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="egP-jq-aM0">
