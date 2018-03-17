@@ -99,6 +99,10 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="34a-L5-I3q">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="375" id="CZL-it-Kae"/>
+                                                    <constraint firstAttribute="height" constant="375" id="ZVT-gd-lLq"/>
+                                                </constraints>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -122,9 +126,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="34a-L5-I3q" firstAttribute="height" secondItem="V41-j7-bou" secondAttribute="height" id="9mZ-cx-4MN"/>
                                     <constraint firstItem="faG-0t-rg6" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="top" id="KOP-4O-cbJ"/>
-                                    <constraint firstItem="34a-L5-I3q" firstAttribute="width" secondItem="V41-j7-bou" secondAttribute="width" id="KjJ-dI-jAX"/>
                                     <constraint firstAttribute="bottom" secondItem="rhA-fE-JyX" secondAttribute="bottom" id="NoM-Ah-dKY"/>
                                     <constraint firstItem="faG-0t-rg6" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="PIX-9M-dIX"/>
                                     <constraint firstAttribute="bottom" secondItem="faG-0t-rg6" secondAttribute="bottom" id="SOV-lN-orw"/>
@@ -224,9 +226,11 @@
                         <outlet property="gridLayout" destination="MVM-FO-Eik" id="kpW-NF-WQg"/>
                         <outlet property="navigationBarView" destination="bM5-bQ-Ly8" id="qg1-z4-0kX"/>
                         <outlet property="previewAreaView" destination="V41-j7-bou" id="aBx-wG-6Pv"/>
+                        <outlet property="previewHeightConstraint" destination="ZVT-gd-lLq" id="mRN-gt-G4D"/>
                         <outlet property="previewImageView" destination="34a-L5-I3q" id="DCT-aB-l8b"/>
                         <outlet property="previewImageZoomView" destination="faG-0t-rg6" id="4bp-0w-KGI"/>
                         <outlet property="previewTapAreaView" destination="rhA-fE-JyX" id="Z6f-Fd-U3C"/>
+                        <outlet property="previewWidthConstraint" destination="CZL-it-Kae" id="rG6-eT-iqj"/>
                     </connections>
                 </viewController>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="egP-jq-aM0">

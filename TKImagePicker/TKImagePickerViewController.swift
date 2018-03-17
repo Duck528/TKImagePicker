@@ -14,7 +14,7 @@ import Photos
 public protocol TKImagePickerViewControllerDelegate: class {
     
     func imagePickerViewControllerDidCancel(_ imagePicker: TKImagePickerViewController)
-    func imagePickerViewControllerDidAdd(_ imagePicker: TKImagePickerViewController, image: UIImage)
+    func imagePickerViewControllerDidAdd(_ imagePicker: TKImagePickerViewController, image: UIImage?)
 }
 
 
@@ -32,6 +32,8 @@ public class TKImagePickerViewController: UIViewController {
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var previewImageZoomView: UIScrollView!
     @IBOutlet weak var previewTapAreaView: UIView!
+    @IBOutlet weak var previewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var previewHeightConstraint: NSLayoutConstraint!
     
     private let cellIdentifier = "PhotoCell"
     
@@ -186,6 +188,7 @@ public class TKImagePickerViewController: UIViewController {
             
             let firstIndexPath = IndexPath(item: 0, section: 0)
             self.loadImage(at: firstIndexPath, size: self.previewImageView.frame.size, onSuccess: { image in
+                self.initializePreviewToCrop(image)
                 self.previewImageView.image = image
                 self.collectionView.selectItem(at: firstIndexPath, animated: false, scrollPosition: .top)
             })
@@ -195,8 +198,39 @@ public class TKImagePickerViewController: UIViewController {
         })
     }
     
+    private func initializePreviewToCrop(_ image: UIImage) {
+        previewWidthConstraint.constant = image.size.width
+        previewHeightConstraint.constant = image.size.height
+        
+        let widthScale = previewImageZoomView.frame.size.width / image.size.width
+        let heightScale = previewImageZoomView.frame.size.height / image.size.height
+        let scale = max(widthScale, heightScale)
+        
+        previewImageZoomView.minimumZoomScale = scale
+        previewImageZoomView.zoomScale = scale
+    }
+    
+    private func cropZoomedImage() -> UIImage? {
+        let reverseScale = 1 / previewImageZoomView.zoomScale
+        
+        let xOffset = previewImageZoomView.contentOffset.x * reverseScale
+        let yOffset = previewImageZoomView.contentOffset.y * reverseScale
+        
+        let adjustedWidth = previewImageZoomView.bounds.width * reverseScale
+        let adjustedHeight = previewImageZoomView.bounds.height * reverseScale
+        
+        let origin = CGPoint(x: xOffset, y: yOffset)
+        let size = CGSize(width: adjustedWidth, height: adjustedHeight)
+        if let cgZoomedImage = previewImageView.image?.cgImage?.cropping(to: CGRect(origin: origin, size: size)) {
+            return UIImage(cgImage: cgZoomedImage)
+        } else {
+            return nil
+        }
+    }
+    
     @IBAction func addButtonTapped() {
-        delegate?.imagePickerViewControllerDidCancel(self)
+        let zoomedImage = cropZoomedImage()
+        delegate?.imagePickerViewControllerDidAdd(self, image: zoomedImage)
     }
     
     @IBAction func cancelButtonTapped() {
@@ -277,6 +311,7 @@ extension TKImagePickerViewController: UICollectionViewDelegate {
                                didSelectItemAt indexPath: IndexPath) {
         loadImage(at: indexPath, size: previewImageView.frame.size, onSuccess: { [weak self] image in
             guard let `self` = self else { return }
+            self.initializePreviewToCrop(image)
             self.previewImageView.image = image
             if !self.previewPresented {
                 self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)

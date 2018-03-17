@@ -25,14 +25,26 @@
                                     <action selector="imagePickerButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="6fd-18-8P2"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1BZ-Uq-goV">
+                                <rect key="frame" x="127.5" y="70" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="1od-vQ-fR7"/>
+                                    <constraint firstAttribute="height" constant="120" id="7qS-Rd-5qa"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="1BZ-Uq-goV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="03n-in-DE7"/>
                             <constraint firstItem="V1a-Iy-OVk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3aO-qA-CNK"/>
                             <constraint firstItem="V1a-Iy-OVk" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="BrV-87-ObM"/>
+                            <constraint firstItem="1BZ-Uq-goV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="vCO-xb-9Bi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="1BZ-Uq-goV" id="8x6-6J-Dc6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -128,7 +128,6 @@
 			children = (
 				FC7BE9BE20545B2900D36655 /* TKUtil */,
 				FC7BE9652054487200D36655 /* TKResources */,
-				FC7BE964205447DD00D36655 /* TKCropper */,
 				FC7BE963205447BA00D36655 /* TKAlbum */,
 				FC7BE9592054470700D36655 /* TKImagePicker.h */,
 				FC7BE95A2054470700D36655 /* Info.plist */,
@@ -147,13 +146,6 @@
 				FCE9F1692055614600C256B9 /* TKAlbumViewController.swift */,
 			);
 			path = TKAlbum;
-			sourceTree = "<group>";
-		};
-		FC7BE964205447DD00D36655 /* TKCropper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TKCropper;
 			sourceTree = "<group>";
 		};
 		FC7BE9652054487200D36655 /* TKResources */ = {

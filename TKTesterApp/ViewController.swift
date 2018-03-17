@@ -12,6 +12,8 @@ import TKImagePicker
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var imageView: UIImageView!
+    
     @IBAction func imagePickerButtonTapped() {
         let vc = TKImagePickerViewController.create()
         vc.delegate = self
@@ -26,7 +28,8 @@ extension ViewController: TKImagePickerViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerViewControllerDidAdd(_ imagePicker: TKImagePickerViewController, image: UIImage) {
+    func imagePickerViewControllerDidAdd(_ imagePicker: TKImagePickerViewController, image: UIImage?) {
+        imageView.image = image
         dismiss(animated: true, completion: nil)
     }
 }
