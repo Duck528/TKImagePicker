@@ -20,6 +20,7 @@ public protocol TKImagePickerViewControllerDelegate: class {
 
 public class TKImagePickerViewController: UIViewController {
     
+    @IBOutlet weak var navigationBarView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var gridLayout: TKGridLayout!
     @IBOutlet weak var addButton: UIButton!
@@ -29,7 +30,7 @@ public class TKImagePickerViewController: UIViewController {
     @IBOutlet weak var albumTitleLabel: UILabel!
     @IBOutlet weak var previewAreaView: UIView!
     @IBOutlet weak var previewImageView: UIImageView!
-    @IBOutlet weak var navigationBarView: UIView!
+    @IBOutlet weak var previewImageZoomView: UIScrollView!
     @IBOutlet weak var previewTapAreaView: UIView!
     
     private let cellIdentifier = "PhotoCell"
@@ -266,6 +267,15 @@ extension TKImagePickerViewController: UICollectionViewDelegate {
         loadImage(at: indexPath, size: previewImageView.frame.size, onSuccess: { [weak self] image in
             self?.previewImageView.image = image
         })
+    }
+}
+
+
+extension TKImagePickerViewController: UIScrollViewDelegate {
+    
+    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        if scrollView != previewImageZoomView { return nil }
+        return previewImageView
     }
 }
 

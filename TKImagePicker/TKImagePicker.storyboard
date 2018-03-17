@@ -94,7 +94,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V41-j7-bou" userLabel="Preview Area">
                                 <rect key="frame" x="0.0" y="76" width="375" height="375"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="faG-0t-rg6">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.59999999999999998" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="faG-0t-rg6">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="34a-L5-I3q">
@@ -106,7 +106,11 @@
                                             <constraint firstAttribute="bottom" secondItem="34a-L5-I3q" secondAttribute="bottom" id="UjQ-u6-WCT"/>
                                             <constraint firstItem="34a-L5-I3q" firstAttribute="leading" secondItem="faG-0t-rg6" secondAttribute="leading" id="Ynv-jC-c1L"/>
                                             <constraint firstItem="34a-L5-I3q" firstAttribute="top" secondItem="faG-0t-rg6" secondAttribute="top" id="YrD-6R-mg6"/>
+                                            <constraint firstAttribute="height" constant="375" id="qBm-ht-K3Z"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="delegate" destination="c0y-kn-bRr" id="ety-Je-3m4"/>
+                                        </connections>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhA-fE-JyX" userLabel="Tap Area">
                                         <rect key="frame" x="0.0" y="319" width="375" height="56"/>
@@ -118,8 +122,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="34a-L5-I3q" firstAttribute="height" secondItem="V41-j7-bou" secondAttribute="height" id="DYS-S0-eHl"/>
+                                    <constraint firstItem="34a-L5-I3q" firstAttribute="height" secondItem="V41-j7-bou" secondAttribute="height" id="9mZ-cx-4MN"/>
                                     <constraint firstItem="faG-0t-rg6" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="top" id="KOP-4O-cbJ"/>
+                                    <constraint firstItem="34a-L5-I3q" firstAttribute="width" secondItem="V41-j7-bou" secondAttribute="width" id="KjJ-dI-jAX"/>
                                     <constraint firstAttribute="bottom" secondItem="rhA-fE-JyX" secondAttribute="bottom" id="NoM-Ah-dKY"/>
                                     <constraint firstItem="faG-0t-rg6" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="PIX-9M-dIX"/>
                                     <constraint firstAttribute="bottom" secondItem="faG-0t-rg6" secondAttribute="bottom" id="SOV-lN-orw"/>
@@ -127,7 +132,6 @@
                                     <constraint firstAttribute="height" constant="375" id="W8D-rI-ukP"/>
                                     <constraint firstItem="rhA-fE-JyX" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="dsW-nD-XCo"/>
                                     <constraint firstAttribute="trailing" secondItem="rhA-fE-JyX" secondAttribute="trailing" id="hXd-xP-yF8"/>
-                                    <constraint firstItem="34a-L5-I3q" firstAttribute="width" secondItem="V41-j7-bou" secondAttribute="width" id="s7J-Xw-YBE"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UaR-DV-m27">
@@ -221,6 +225,7 @@
                         <outlet property="navigationBarView" destination="bM5-bQ-Ly8" id="qg1-z4-0kX"/>
                         <outlet property="previewAreaView" destination="V41-j7-bou" id="aBx-wG-6Pv"/>
                         <outlet property="previewImageView" destination="34a-L5-I3q" id="DCT-aB-l8b"/>
+                        <outlet property="previewImageZoomView" destination="faG-0t-rg6" id="4bp-0w-KGI"/>
                         <outlet property="previewTapAreaView" destination="rhA-fE-JyX" id="Z6f-Fd-U3C"/>
                     </connections>
                 </viewController>
