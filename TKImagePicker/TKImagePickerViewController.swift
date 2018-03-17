@@ -180,8 +180,15 @@ public class TKImagePickerViewController: UIViewController {
     
     private func setupAlbums() {
         albumCollection.albumSelected = { [weak self] album in
-            self?.albumTitleLabel.text = album.albumTitle
-            self?.collectionView.reloadData()
+            guard let `self` = self else { return }
+            self.albumTitleLabel.text = album.albumTitle
+            self.collectionView.reloadData()
+            
+            let firstIndexPath = IndexPath(item: 0, section: 0)
+            self.loadImage(at: firstIndexPath, size: self.previewImageView.frame.size, onSuccess: { image in
+                self.previewImageView.image = image
+                self.collectionView.selectItem(at: firstIndexPath, animated: false, scrollPosition: .top)
+            })
         }
         albumCollection.fetchPhotoAlbums(onCompletion: { [weak self] in
             self?.collectionView.reloadData()

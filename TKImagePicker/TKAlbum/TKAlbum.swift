@@ -23,6 +23,11 @@ class TKAlbum {
         self.photoAssets = photoAssets
     }
     
+    func hasPhoto(at indexPath: IndexPath) -> Bool {
+        guard indexPath.item >= 0, indexPath.item < photoAssets.count else { return false }
+        return true
+    }
+    
     func photo(at indexPath: IndexPath) -> PHAsset? {
         guard indexPath.item >= 0, indexPath.item < photoAssets.count else { return nil }
         return photoAssets[indexPath.item]
@@ -75,7 +80,9 @@ class TKAlbumCollection {
             
             self.currentAlbum = self.photoAlbums.first
             DispatchQueue.main.async {
+                guard let album = self.currentAlbum else { return }
                 onCompletion()
+                self.albumSelected?(album)
             }
         }
     }
