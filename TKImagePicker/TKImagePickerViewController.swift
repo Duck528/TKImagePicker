@@ -44,7 +44,7 @@ public class TKImagePickerViewController: UIViewController {
     private var priorContentOffset: CGPoint?
     
     private let maxPreviewTopDistance: CGFloat = -376
-    private let needToCloseRatio: CGFloat = 0.7
+    private let needToCloseRatio: CGFloat = 0.5
     
     private lazy var topDistance: CGFloat = {
         return navigationBarView.bounds.height + previewAreaView.bounds.height
@@ -83,7 +83,7 @@ public class TKImagePickerViewController: UIViewController {
         let fromFrame = CGRect(origin: albumsBottomOrigin, size: albumsSize)
         add(childViewController: albumsViewController, frame: fromFrame)
         
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+        UIView.animate(withDuration: 0.15, animations: { [weak self] in
             guard let `self` = self else { return }
             self.albumsViewController.view.frame.origin = self.albumsTopOrigin
             self.cancelButton.alpha = 0
@@ -92,7 +92,7 @@ public class TKImagePickerViewController: UIViewController {
     }
     
     func dismissAlbums() {
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+        UIView.animate(withDuration: 0.15, animations: { [weak self] in
             guard let `self` = self else { return }
             self.albumsViewController.view.frame.origin = self.albumsBottomOrigin
             self.cancelButton.alpha = 1
@@ -262,10 +262,19 @@ extension TKImagePickerViewController: UICollectionViewDelegate {
         })
     }
     
+    private func isVisibleCell(at indexPath: IndexPath) -> Bool {
+        return collectionView.indexPathsForVisibleItems.contains { $0 == indexPath }
+    }
+    
     public func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
         loadImage(at: indexPath, size: previewImageView.frame.size, onSuccess: { [weak self] image in
-            self?.previewImageView.image = image
+            guard let `self` = self else { return }
+            self.previewImageView.image = image
+            if !self.previewPresented {
+                self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+            }
+            self.openPreview()
         })
     }
 }
@@ -299,6 +308,12 @@ class TKPhotoCell: UICollectionViewCell {
     var model: PHAsset? {
         didSet {
             updateUI()
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            blurView.alpha = isSelected ? 0.7 : 0
         }
     }
     
