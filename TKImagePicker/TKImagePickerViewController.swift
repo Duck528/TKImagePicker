@@ -315,7 +315,7 @@ extension TKImagePickerViewController: UICollectionViewDelegate {
             guard let `self` = self else { return }
             self.setImageToPreview(image)
             if !self.previewPresented {
-                self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+                self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
             }
             self.openPreview()
         })
