@@ -12,7 +12,6 @@ import Photos
 
 
 public protocol TKImagePickerViewControllerDelegate: class {
-    
     func imagePickerViewControllerDidCancel(_ imagePicker: TKImagePickerViewController)
     func imagePickerViewControllerDidAdd(_ imagePicker: TKImagePickerViewController, image: UIImage?)
 }
@@ -188,8 +187,7 @@ public class TKImagePickerViewController: UIViewController {
             
             let firstIndexPath = IndexPath(item: 0, section: 0)
             self.loadImage(at: firstIndexPath, size: self.previewImageView.frame.size, onSuccess: { image in
-                self.initializePreviewToCrop(image)
-                self.previewImageView.image = image
+                self.setImageToPreview(image)
                 self.collectionView.selectItem(at: firstIndexPath, animated: false, scrollPosition: .top)
             })
         }
@@ -198,16 +196,20 @@ public class TKImagePickerViewController: UIViewController {
         })
     }
     
-    private func initializePreviewToCrop(_ image: UIImage) {
+    private func setImageToPreview(_ image: UIImage) {
         previewWidthConstraint.constant = image.size.width
         previewHeightConstraint.constant = image.size.height
         
         let widthScale = previewImageZoomView.frame.size.width / image.size.width
         let heightScale = previewImageZoomView.frame.size.height / image.size.height
-        let scale = max(widthScale, heightScale)
+        let minScale = min(widthScale, heightScale)
+        let maxScale = max(widthScale, heightScale)
         
-        previewImageZoomView.minimumZoomScale = scale
-        previewImageZoomView.zoomScale = scale
+        previewImageView.image = image
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
+            self?.previewImageZoomView.minimumZoomScale = minScale
+            self?.previewImageZoomView.zoomScale = maxScale
+        })
     }
     
     private func cropZoomedImage() -> UIImage? {
@@ -311,8 +313,7 @@ extension TKImagePickerViewController: UICollectionViewDelegate {
                                didSelectItemAt indexPath: IndexPath) {
         loadImage(at: indexPath, size: previewImageView.frame.size, onSuccess: { [weak self] image in
             guard let `self` = self else { return }
-            self.initializePreviewToCrop(image)
-            self.previewImageView.image = image
+            self.setImageToPreview(image)
             if !self.previewPresented {
                 self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
             }
@@ -325,12 +326,17 @@ extension TKImagePickerViewController: UICollectionViewDelegate {
 extension TKImagePickerViewController: UIScrollViewDelegate {
     
     public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        if scrollView != previewImageZoomView { return nil }
+        guard scrollView == previewImageZoomView else {
+            return nil
+        }
         return previewImageView
     }
     
     public func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        if scrollView != previewImageZoomView { return }
+        guard scrollView == previewImageZoomView else {
+            return
+        }
+
         let offsetX = max((scrollView.bounds.width - scrollView.contentSize.width) * 0.5, 0)
         let offsetY = max((scrollView.bounds.height - scrollView.contentSize.height) * 0.5, 0)
         scrollView.contentInset = UIEdgeInsets(top: offsetY, left: offsetX, bottom: 0, right: 0)
