@@ -186,7 +186,7 @@ public class TKImagePickerViewController: UIViewController {
             self.collectionView.reloadData()
             
             let firstIndexPath = IndexPath(item: 0, section: 0)
-            self.loadImage(at: firstIndexPath, size: self.previewImageView.frame.size, onSuccess: { image in
+            self.loadImage(at: firstIndexPath, size: self.previewAreaView.bounds.size, onSuccess: { image in
                 self.setImageToPreview(image)
                 self.collectionView.selectItem(at: firstIndexPath, animated: false, scrollPosition: .top)
             })
@@ -197,19 +197,21 @@ public class TKImagePickerViewController: UIViewController {
     }
     
     private func setImageToPreview(_ image: UIImage) {
-        previewWidthConstraint.constant = image.size.width
-        previewHeightConstraint.constant = image.size.height
-        
         let widthScale = previewImageZoomView.frame.size.width / image.size.width
         let heightScale = previewImageZoomView.frame.size.height / image.size.height
         let minScale = min(widthScale, heightScale)
         let maxScale = max(widthScale, heightScale)
         
-        previewImageView.image = image
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
+        print("minScale: \(minScale) maxScale: \(maxScale), imageSize: \(image.size)")
+        
+        previewWidthConstraint.constant = image.size.width
+        previewHeightConstraint.constant = image.size.height
+        
+        DispatchQueue.main.async { [weak self] in
             self?.previewImageZoomView.minimumZoomScale = minScale
-            self?.previewImageZoomView.zoomScale = maxScale
-        })
+            self?.previewImageZoomView.setZoomScale(maxScale, animated: true)
+            self?.previewImageView.image = image
+        }
     }
     
     private func cropZoomedImage() -> UIImage? {
@@ -294,9 +296,13 @@ extension TKImagePickerViewController: UICollectionViewDelegate {
     
     private func loadImage(at indexPath: IndexPath, size: CGSize, onSuccess: @escaping ((UIImage) -> ())) {
         guard let phAsset = albumCollection.currentAlbum?.photo(at: indexPath) else { return }
-        PHImageManager.default().requestImage(
-            for: phAsset, targetSize: size,
-            contentMode: .aspectFill, options: nil,
+        
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .highQualityFormat
+        options.resizeMode = .fast
+        options.isNetworkAccessAllowed = true
+        
+        PHImageManager.default().requestImage(for: phAsset, targetSize: size, contentMode: .aspectFill, options: options,
             resultHandler: { image, _ in
                 guard let image = image else { return }
                 DispatchQueue.main.async {
@@ -311,7 +317,7 @@ extension TKImagePickerViewController: UICollectionViewDelegate {
     
     public func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
-        loadImage(at: indexPath, size: previewImageView.frame.size, onSuccess: { [weak self] image in
+        loadImage(at: indexPath, size: previewAreaView.bounds.size, onSuccess: { [weak self] image in
             guard let `self` = self else { return }
             self.setImageToPreview(image)
             if !self.previewPresented {
