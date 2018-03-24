@@ -79,7 +79,6 @@ public class TKImagePickerViewController: UIViewController {
         return point
     }()
     
-    
     func presentAlbums() {
         let fromFrame = CGRect(origin: albumsBottomOrigin, size: albumsSize)
         add(childViewController: albumsViewController, frame: fromFrame)
@@ -197,12 +196,12 @@ public class TKImagePickerViewController: UIViewController {
     }
     
     private func setImageToPreview(_ image: UIImage) {
+        previewImageZoomView.contentOffset = .zero
+        
         let widthScale = previewImageZoomView.frame.size.width / image.size.width
         let heightScale = previewImageZoomView.frame.size.height / image.size.height
         let minScale = min(widthScale, heightScale)
         let maxScale = max(widthScale, heightScale)
-        
-        print("minScale: \(minScale) maxScale: \(maxScale), imageSize: \(image.size)")
         
         previewWidthConstraint.constant = image.size.width
         previewHeightConstraint.constant = image.size.height
@@ -211,6 +210,9 @@ public class TKImagePickerViewController: UIViewController {
             self?.previewImageZoomView.minimumZoomScale = minScale
             self?.previewImageZoomView.setZoomScale(maxScale, animated: true)
             self?.previewImageView.image = image
+            
+            self?.previewImageView.layer.removeAllAnimations()
+            self?.previewImageZoomView.layer.removeAllAnimations()
         }
     }
     
