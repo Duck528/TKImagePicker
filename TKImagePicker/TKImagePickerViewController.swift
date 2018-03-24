@@ -238,7 +238,7 @@ extension TKImagePickerViewController {
         let fromFrame = CGRect(origin: albumsBottomOrigin, size: albumsSize)
         add(childViewController: albumsViewController, frame: fromFrame)
         
-        UIView.animate(withDuration: 0.15, animations: { [weak self] in
+        UIView.animate(withDuration: 0.25, animations: { [weak self] in
             guard let `self` = self else { return }
             self.albumsViewController.view.frame.origin = self.albumsTopOrigin
             self.cancelButton.alpha = 0
@@ -247,7 +247,7 @@ extension TKImagePickerViewController {
     }
     
     private func dismissAlbums() {
-        UIView.animate(withDuration: 0.15, animations: { [weak self] in
+        UIView.animate(withDuration: 0.25, animations: { [weak self] in
             guard let `self` = self else { return }
             self.albumsViewController.view.frame.origin = self.albumsBottomOrigin
             self.cancelButton.alpha = 1
