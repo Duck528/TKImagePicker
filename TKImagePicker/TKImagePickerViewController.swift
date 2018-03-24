@@ -138,7 +138,7 @@ public class TKImagePickerViewController: UIViewController {
             
             let firstIndexPath = IndexPath(item: 0, section: 0)
             self.loadImage(at: firstIndexPath, size: self.previewAreaView.bounds.size, onSuccess: { image in
-                self.setImageToPreview(image)
+                self.setImageToPreview(image, isFullscreen: true)
                 self.collectionView.selectItem(at: firstIndexPath, animated: false, scrollPosition: .top)
             })
         }
@@ -187,7 +187,7 @@ extension TKImagePickerViewController {
         }
     }
     
-    private func setImageToPreview(_ image: UIImage) {
+    private func setImageToPreview(_ image: UIImage, isFullscreen: Bool) {
         previewImageZoomView.contentOffset = .zero
         
         let widthScale = previewImageZoomView.frame.size.width / image.size.width
@@ -200,7 +200,9 @@ extension TKImagePickerViewController {
         
         DispatchQueue.main.async { [weak self] in
             self?.previewImageZoomView.minimumZoomScale = minScale
-            self?.previewImageZoomView.setZoomScale(maxScale, animated: true)
+            if isFullscreen { self?.previewImageZoomView.setZoomScale(maxScale, animated: true) }
+            else { self?.previewImageZoomView.setZoomScale(minScale, animated: true) }
+            
             self?.previewImageView.image = image
             
             self?.previewImageView.layer.removeAllAnimations()
@@ -325,7 +327,7 @@ extension TKImagePickerViewController: UICollectionViewDelegate {
                                didSelectItemAt indexPath: IndexPath) {
         loadImage(at: indexPath, size: previewAreaView.bounds.size, onSuccess: { [weak self] image in
             guard let `self` = self else { return }
-            self.setImageToPreview(image)
+            self.setImageToPreview(image, isFullscreen: true)
             if !self.previewPresented {
                 self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
             }
@@ -420,11 +422,13 @@ class TKPhotoCell: UICollectionViewCell {
                 guard let avAsset = avAsset else { return }
                 let thumbnailGenerator = AVAssetImageGenerator(asset: avAsset)
                 let thumbnailTime = CMTime(seconds: 1, preferredTimescale: 60)
+                let durationTime = Int(avAsset.duration.seconds).formattedTimeString()
                 let cgImage = try? thumbnailGenerator.copyCGImage(at: thumbnailTime, actualTime: nil)
                 if let cgImage = cgImage {
                     let thumbnailImage = UIImage(cgImage: cgImage)
                     DispatchQueue.main.async {
                         self?.imageView.image = thumbnailImage
+                        self?.videoPlayTimeLabel.text = durationTime
                     }
                 }
         })

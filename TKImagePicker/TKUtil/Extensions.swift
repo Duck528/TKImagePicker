@@ -27,6 +27,27 @@ extension Int {
         formatter.numberStyle = .decimal
         return formatter.string(from: NSNumber(value: self))
     }
+    
+    private func timeString() -> String {
+        if self < 10 { return "0\(self)" }
+        else { return String(self) }
+    }
+    
+    private func parseToTime() -> (hour: Int, minutes: Int, seconds: Int) {
+        let hours = self / 3600
+        let minutes = self % 3600 / 60
+        let seconds = self % 3600 % 60
+        return (hours, minutes, seconds)
+    }
+    
+    func formattedTimeString() -> String {
+        let time = parseToTime()
+        let hours = time.hour.timeString()
+        let minutes = time.minutes.timeString()
+        let seconds = time.seconds.timeString()
+        if time.hour > 0 { return "\(hours):\(minutes):\(seconds)" }
+        else { return "\(minutes):\(seconds)" }
+    }
 }
 
 
