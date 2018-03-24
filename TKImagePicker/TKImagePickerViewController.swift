@@ -79,30 +79,6 @@ public class TKImagePickerViewController: UIViewController {
         return point
     }()
     
-    func presentAlbums() {
-        let fromFrame = CGRect(origin: albumsBottomOrigin, size: albumsSize)
-        add(childViewController: albumsViewController, frame: fromFrame)
-        
-        UIView.animate(withDuration: 0.15, animations: { [weak self] in
-            guard let `self` = self else { return }
-            self.albumsViewController.view.frame.origin = self.albumsTopOrigin
-            self.cancelButton.alpha = 0
-            self.addButton.alpha = 0
-        })
-    }
-    
-    func dismissAlbums() {
-        UIView.animate(withDuration: 0.15, animations: { [weak self] in
-            guard let `self` = self else { return }
-            self.albumsViewController.view.frame.origin = self.albumsBottomOrigin
-            self.cancelButton.alpha = 1
-            self.addButton.alpha = 1
-        }, completion: { [weak self] _ in
-            guard let `self` = self else { return }
-            self.remove(childViewController: self.albumsViewController)
-        })
-    }
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -154,6 +130,84 @@ public class TKImagePickerViewController: UIViewController {
         }
     }
     
+    private func setupAlbums() {
+        albumCollection.albumSelected = { [weak self] album in
+            guard let `self` = self else { return }
+            self.albumTitleLabel.text = album.albumTitle
+            self.collectionView.reloadData()
+            
+            let firstIndexPath = IndexPath(item: 0, section: 0)
+            self.loadImage(at: firstIndexPath, size: self.previewAreaView.bounds.size, onSuccess: { image in
+                self.setImageToPreview(image)
+                self.collectionView.selectItem(at: firstIndexPath, animated: false, scrollPosition: .top)
+            })
+        }
+        albumCollection.fetchPhotoAlbums(onCompletion: { [weak self] in
+            self?.collectionView.reloadData()
+        })
+    }
+    
+    @IBAction func addButtonTapped() {
+        let zoomedImage = cropZoomedImage()
+        delegate?.imagePickerViewControllerDidAdd(self, image: zoomedImage)
+    }
+    
+    @IBAction func cancelButtonTapped() {
+        delegate?.imagePickerViewControllerDidCancel(self)
+    }
+    
+    
+    @IBAction func albumButtonTapped(_ sender: UIButton) {
+        if albumsPresented { dismissAlbums() }
+        else { presentAlbums() }
+        albumsPresented = !albumsPresented
+    }
+    
+    public override var prefersStatusBarHidden: Bool { return true }
+}
+
+
+extension TKImagePickerViewController {
+    
+    private func cropZoomedImage() -> UIImage? {
+        let reverseScale = 1 / previewImageZoomView.zoomScale
+        
+        let xOffset = previewImageZoomView.contentOffset.x * reverseScale
+        let yOffset = previewImageZoomView.contentOffset.y * reverseScale
+        
+        let adjustedWidth = previewImageZoomView.bounds.width * reverseScale
+        let adjustedHeight = previewImageZoomView.bounds.height * reverseScale
+        
+        let origin = CGPoint(x: xOffset, y: yOffset)
+        let size = CGSize(width: adjustedWidth, height: adjustedHeight)
+        if let cgZoomedImage = previewImageView.image?.cgImage?.cropping(to: CGRect(origin: origin, size: size)) {
+            return UIImage(cgImage: cgZoomedImage)
+        } else {
+            return nil
+        }
+    }
+    
+    private func setImageToPreview(_ image: UIImage) {
+        previewImageZoomView.contentOffset = .zero
+        
+        let widthScale = previewImageZoomView.frame.size.width / image.size.width
+        let heightScale = previewImageZoomView.frame.size.height / image.size.height
+        let minScale = min(widthScale, heightScale)
+        let maxScale = max(widthScale, heightScale)
+        
+        previewWidthConstraint.constant = image.size.width
+        previewHeightConstraint.constant = image.size.height
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.previewImageZoomView.minimumZoomScale = minScale
+            self?.previewImageZoomView.setZoomScale(maxScale, animated: true)
+            self?.previewImageView.image = image
+            
+            self?.previewImageView.layer.removeAllAnimations()
+            self?.previewImageZoomView.layer.removeAllAnimations()
+        }
+    }
+    
     private func closePreview() {
         navigationBarView.snp.updateConstraints { (make) in
             make.top.equalToSuperview().offset(maxPreviewTopDistance)
@@ -178,79 +232,29 @@ public class TKImagePickerViewController: UIViewController {
         previewPresented = true
     }
     
-    private func setupAlbums() {
-        albumCollection.albumSelected = { [weak self] album in
+    private func presentAlbums() {
+        let fromFrame = CGRect(origin: albumsBottomOrigin, size: albumsSize)
+        add(childViewController: albumsViewController, frame: fromFrame)
+        
+        UIView.animate(withDuration: 0.15, animations: { [weak self] in
             guard let `self` = self else { return }
-            self.albumTitleLabel.text = album.albumTitle
-            self.collectionView.reloadData()
-            
-            let firstIndexPath = IndexPath(item: 0, section: 0)
-            self.loadImage(at: firstIndexPath, size: self.previewAreaView.bounds.size, onSuccess: { image in
-                self.setImageToPreview(image)
-                self.collectionView.selectItem(at: firstIndexPath, animated: false, scrollPosition: .top)
-            })
-        }
-        albumCollection.fetchPhotoAlbums(onCompletion: { [weak self] in
-            self?.collectionView.reloadData()
+            self.albumsViewController.view.frame.origin = self.albumsTopOrigin
+            self.cancelButton.alpha = 0
+            self.addButton.alpha = 0
         })
     }
     
-    private func setImageToPreview(_ image: UIImage) {
-        previewImageZoomView.contentOffset = .zero
-        
-        let widthScale = previewImageZoomView.frame.size.width / image.size.width
-        let heightScale = previewImageZoomView.frame.size.height / image.size.height
-        let minScale = min(widthScale, heightScale)
-        let maxScale = max(widthScale, heightScale)
-        
-        previewWidthConstraint.constant = image.size.width
-        previewHeightConstraint.constant = image.size.height
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.previewImageZoomView.minimumZoomScale = minScale
-            self?.previewImageZoomView.setZoomScale(maxScale, animated: true)
-            self?.previewImageView.image = image
-            
-            self?.previewImageView.layer.removeAllAnimations()
-            self?.previewImageZoomView.layer.removeAllAnimations()
-        }
+    private func dismissAlbums() {
+        UIView.animate(withDuration: 0.15, animations: { [weak self] in
+            guard let `self` = self else { return }
+            self.albumsViewController.view.frame.origin = self.albumsBottomOrigin
+            self.cancelButton.alpha = 1
+            self.addButton.alpha = 1
+            }, completion: { [weak self] _ in
+                guard let `self` = self else { return }
+                self.remove(childViewController: self.albumsViewController)
+        })
     }
-    
-    private func cropZoomedImage() -> UIImage? {
-        let reverseScale = 1 / previewImageZoomView.zoomScale
-        
-        let xOffset = previewImageZoomView.contentOffset.x * reverseScale
-        let yOffset = previewImageZoomView.contentOffset.y * reverseScale
-        
-        let adjustedWidth = previewImageZoomView.bounds.width * reverseScale
-        let adjustedHeight = previewImageZoomView.bounds.height * reverseScale
-        
-        let origin = CGPoint(x: xOffset, y: yOffset)
-        let size = CGSize(width: adjustedWidth, height: adjustedHeight)
-        if let cgZoomedImage = previewImageView.image?.cgImage?.cropping(to: CGRect(origin: origin, size: size)) {
-            return UIImage(cgImage: cgZoomedImage)
-        } else {
-            return nil
-        }
-    }
-    
-    @IBAction func addButtonTapped() {
-        let zoomedImage = cropZoomedImage()
-        delegate?.imagePickerViewControllerDidAdd(self, image: zoomedImage)
-    }
-    
-    @IBAction func cancelButtonTapped() {
-        delegate?.imagePickerViewControllerDidCancel(self)
-    }
-    
-    
-    @IBAction func albumButtonTapped(_ sender: UIButton) {
-        if albumsPresented { dismissAlbums() }
-        else { presentAlbums() }
-        albumsPresented = !albumsPresented
-    }
-    
-    public override var prefersStatusBarHidden: Bool { return true }
 }
 
 
