@@ -163,6 +163,9 @@ public class TKImagePickerViewController: UIViewController {
         delegate?.imagePickerViewControllerDidCancel(self)
     }
     
+    @IBAction func tapAreaViewTapped() {
+        if !previewPresented { openPreview() }
+    }
     
     @IBAction func albumButtonTapped(_ sender: UIButton) {
         if albumsPresented { dismissAlbums() }
@@ -448,7 +451,6 @@ class TKPhotoCell: UICollectionViewCell {
         })
     }
 }
-
 
 
 
