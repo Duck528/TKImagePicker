@@ -123,15 +123,23 @@
                                             <constraint firstAttribute="height" constant="56" id="UXQ-mA-Fau"/>
                                         </constraints>
                                     </view>
+                                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ZS-Tv-P9Y" userLabel="Effect View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="6ZS-Tv-P9Y" secondAttribute="bottom" id="EkP-nS-RVl"/>
                                     <constraint firstItem="faG-0t-rg6" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="top" id="KOP-4O-cbJ"/>
                                     <constraint firstAttribute="bottom" secondItem="rhA-fE-JyX" secondAttribute="bottom" id="NoM-Ah-dKY"/>
                                     <constraint firstItem="faG-0t-rg6" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="PIX-9M-dIX"/>
+                                    <constraint firstItem="6ZS-Tv-P9Y" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="top" id="Q8i-W6-fTa"/>
+                                    <constraint firstAttribute="trailing" secondItem="6ZS-Tv-P9Y" secondAttribute="trailing" id="Qbb-fc-aDj"/>
                                     <constraint firstAttribute="bottom" secondItem="faG-0t-rg6" secondAttribute="bottom" id="SOV-lN-orw"/>
                                     <constraint firstAttribute="trailing" secondItem="faG-0t-rg6" secondAttribute="trailing" id="Th9-d8-ljf"/>
                                     <constraint firstAttribute="height" constant="375" id="W8D-rI-ukP"/>
+                                    <constraint firstItem="6ZS-Tv-P9Y" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="aad-xj-cTI"/>
                                     <constraint firstItem="rhA-fE-JyX" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="dsW-nD-XCo"/>
                                     <constraint firstAttribute="trailing" secondItem="rhA-fE-JyX" secondAttribute="trailing" id="hXd-xP-yF8"/>
                                 </constraints>
@@ -226,6 +234,7 @@
                         <outlet property="gridLayout" destination="MVM-FO-Eik" id="kpW-NF-WQg"/>
                         <outlet property="navigationBarView" destination="bM5-bQ-Ly8" id="qg1-z4-0kX"/>
                         <outlet property="previewAreaView" destination="V41-j7-bou" id="aBx-wG-6Pv"/>
+                        <outlet property="previewEffectView" destination="6ZS-Tv-P9Y" id="MpW-X8-hNQ"/>
                         <outlet property="previewHeightConstraint" destination="ZVT-gd-lLq" id="mRN-gt-G4D"/>
                         <outlet property="previewImageView" destination="34a-L5-I3q" id="DCT-aB-l8b"/>
                         <outlet property="previewImageZoomView" destination="faG-0t-rg6" id="4bp-0w-KGI"/>

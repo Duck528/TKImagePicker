@@ -30,6 +30,7 @@ public class TKImagePickerViewController: UIViewController {
     @IBOutlet weak var previewAreaView: UIView!
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var previewImageZoomView: UIScrollView!
+    @IBOutlet weak var previewEffectView: UIView!
     @IBOutlet weak var previewTapAreaView: UIView!
     @IBOutlet weak var previewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var previewHeightConstraint: NSLayoutConstraint!
@@ -46,6 +47,8 @@ public class TKImagePickerViewController: UIViewController {
     
     private let maxPreviewTopDistance: CGFloat = -376
     private let needToCloseRatio: CGFloat = 0.5
+    private let maxEffectViewAlpha: CGFloat = 0.7
+    private let minEffectViewAlpha: CGFloat = 0
     
     private lazy var topDistance: CGFloat = {
         return navigationBarView.bounds.height + previewAreaView.bounds.height
@@ -97,7 +100,10 @@ public class TKImagePickerViewController: UIViewController {
     }
     
     @objc private func openPreviewIfNeeded(_ tapGestureRecognizer: UITapGestureRecognizer) {
-        if !previewPresented { openPreview() }
+        if !previewPresented {
+            openPreview()
+            dimmedEffectView(ratio: 0)
+        }
     }
     
     @objc private func movePreviewIfNeeded(_ panGestureRecognizer: UIPanGestureRecognizer) {
@@ -118,6 +124,7 @@ public class TKImagePickerViewController: UIViewController {
             }
             
             priorContentOffset = collectionView.contentOffset
+            dimmedEffectView(ratio: ratioScroll)
 
         case .ended:
             if ratioScroll > needToCloseRatio {
@@ -204,7 +211,6 @@ extension TKImagePickerViewController {
             else { self?.previewImageZoomView.setZoomScale(minScale, animated: true) }
             
             self?.previewImageView.image = image
-            
             self?.previewImageView.layer.removeAllAnimations()
             self?.previewImageZoomView.layer.removeAllAnimations()
         }
@@ -216,7 +222,9 @@ extension TKImagePickerViewController {
         }
         
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
-            self?.view.layoutIfNeeded()
+            guard let `self` = self else { return }
+            self.dimmedEffectView(ratio: self.maxEffectViewAlpha)
+            self.view.layoutIfNeeded()
         })
         
         previewPresented = false
@@ -228,7 +236,9 @@ extension TKImagePickerViewController {
         }
         
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
-            self?.view.layoutIfNeeded()
+            guard let `self` = self else { return }
+            self.dimmedEffectView(ratio: self.minEffectViewAlpha)
+            self.view.layoutIfNeeded()
         })
         
         previewPresented = true
@@ -256,6 +266,10 @@ extension TKImagePickerViewController {
                 guard let `self` = self else { return }
                 self.remove(childViewController: self.albumsViewController)
         })
+    }
+    
+    private func dimmedEffectView(ratio: CGFloat) {
+        previewEffectView.alpha = min(ratio, maxEffectViewAlpha)
     }
 }
 
