@@ -46,7 +46,8 @@ public class TKImagePickerViewController: UIViewController {
     private var priorContentOffset: CGPoint?
     
     private let maxPreviewTopDistance: CGFloat = -376
-    private let needToCloseRatio: CGFloat = 0.5
+    private let previewScrollThreshold: CGFloat = -160
+    private let needToCloseRatio: CGFloat = 0.3
     private let maxEffectViewAlpha: CGFloat = 0.7
     private let minEffectViewAlpha: CGFloat = 0
     
@@ -371,6 +372,12 @@ extension TKImagePickerViewController: UIScrollViewDelegate {
         let offsetX = max((scrollView.bounds.width - scrollView.contentSize.width) * 0.5, 0)
         let offsetY = max((scrollView.bounds.height - scrollView.contentSize.height) * 0.5, 0)
         scrollView.contentInset = UIEdgeInsets(top: offsetY, left: offsetX, bottom: 0, right: 0)
+    }
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !previewPresented, scrollView.contentOffset.y < previewScrollThreshold {
+            openPreview()
+        }
     }
 }
 
