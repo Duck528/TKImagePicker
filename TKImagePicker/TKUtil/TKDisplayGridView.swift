@@ -11,10 +11,6 @@ import Foundation
 
 class TKDisplayGridView: UIView {
     
-    @objc private func clear() {
-        layer.sublayers?.removeAll()
-    }
-    
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let v = super.hitTest(point, with: event)
         if v == self {
@@ -28,5 +24,9 @@ class TKDisplayGridView: UIView {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(clear), object: nil)
         perform(#selector(clear), with: nil, afterDelay: duration)
         drawGrid(color: .white, lineWidth: 0.6)
+    }
+    
+    @objc private func clear() {
+        layer.sublayers?.removeAll()
     }
 }
