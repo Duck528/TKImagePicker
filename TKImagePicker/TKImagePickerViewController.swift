@@ -32,6 +32,7 @@ public class TKImagePickerViewController: UIViewController {
     @IBOutlet weak var previewImageZoomView: UIScrollView!
     @IBOutlet weak var previewEffectView: UIView!
     @IBOutlet weak var previewTapAreaView: UIView!
+    @IBOutlet weak var displayGridView: TKDisplayGridView!
     @IBOutlet weak var previewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var previewHeightConstraint: NSLayoutConstraint!
     

@@ -123,6 +123,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2M2-mr-vON" customClass="TKDisplayGridView" customModule="TKImagePicker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhA-fE-JyX" userLabel="Tap Area" customClass="UIControl">
                                         <rect key="frame" x="0.0" y="319" width="375" height="56"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -136,6 +140,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="2M2-mr-vON" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="5Bq-Ot-jQk"/>
+                                    <constraint firstItem="2M2-mr-vON" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="top" id="87L-m8-TMT"/>
+                                    <constraint firstAttribute="bottom" secondItem="2M2-mr-vON" secondAttribute="bottom" id="BNz-De-yNL"/>
                                     <constraint firstAttribute="bottom" secondItem="6ZS-Tv-P9Y" secondAttribute="bottom" id="EkP-nS-RVl"/>
                                     <constraint firstItem="faG-0t-rg6" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="top" id="KOP-4O-cbJ"/>
                                     <constraint firstAttribute="bottom" secondItem="rhA-fE-JyX" secondAttribute="bottom" id="NoM-Ah-dKY"/>
@@ -148,6 +155,7 @@
                                     <constraint firstItem="6ZS-Tv-P9Y" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="aad-xj-cTI"/>
                                     <constraint firstItem="rhA-fE-JyX" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="dsW-nD-XCo"/>
                                     <constraint firstAttribute="trailing" secondItem="rhA-fE-JyX" secondAttribute="trailing" id="hXd-xP-yF8"/>
+                                    <constraint firstAttribute="trailing" secondItem="2M2-mr-vON" secondAttribute="trailing" id="qil-KD-Ynv"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UaR-DV-m27">
@@ -237,6 +245,7 @@
                         <outlet property="albumTitleLabel" destination="fCX-bm-0Br" id="X6r-vl-3yJ"/>
                         <outlet property="cancelButton" destination="8XE-gt-6Uf" id="bvU-Ma-1Em"/>
                         <outlet property="collectionView" destination="UaR-DV-m27" id="ufx-iC-7Le"/>
+                        <outlet property="displayGridView" destination="2M2-mr-vON" id="wsG-Zk-Hyp"/>
                         <outlet property="gridLayout" destination="MVM-FO-Eik" id="kpW-NF-WQg"/>
                         <outlet property="navigationBarView" destination="bM5-bQ-Ly8" id="qg1-z4-0kX"/>
                         <outlet property="previewAreaView" destination="V41-j7-bou" id="aBx-wG-6Pv"/>

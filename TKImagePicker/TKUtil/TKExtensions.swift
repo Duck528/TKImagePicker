@@ -67,3 +67,36 @@ extension UIViewController {
         didMove(toParentViewController: self)
     }
 }
+
+
+extension UIView {
+    
+    func drawGrid(color: UIColor, lineWidth: CGFloat) {
+        let height = bounds.height
+        let width = bounds.width
+        let lineColor = color.cgColor
+        
+        drawLine(start: CGPoint(x: bounds.minX, y: height * 0.33),
+                 end: CGPoint(x: bounds.maxX, y: height * 0.33), lineColor: lineColor, lineWidth: lineWidth)
+        drawLine(start: CGPoint(x: bounds.minX, y: height * 0.66),
+                 end: CGPoint(x: bounds.maxX, y: height * 0.66), lineColor: lineColor, lineWidth: lineWidth)
+        
+        drawLine(start: CGPoint(x: width * 0.33, y: bounds.minY),
+                 end: CGPoint(x: width * 0.33, y: bounds.maxY), lineColor: lineColor, lineWidth: lineWidth)
+        drawLine(start: CGPoint(x: width * 0.66, y: bounds.minY),
+                 end: CGPoint(x: width * 0.66, y: bounds.maxY), lineColor: lineColor, lineWidth: lineWidth)
+    }
+    
+    func drawLine(start: CGPoint, end: CGPoint, lineColor: CGColor, lineWidth: CGFloat) {
+        let path = UIBezierPath()
+        path.move(to: start)
+        path.addLine(to: end)
+        
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.strokeColor = lineColor
+        shapeLayer.lineWidth = lineWidth
+        layer.addSublayer(shapeLayer)
+        path.close()
+    }
+}
