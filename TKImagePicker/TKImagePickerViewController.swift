@@ -30,6 +30,7 @@ public class TKImagePickerViewController: UIViewController {
     @IBOutlet weak var previewAreaView: UIView!
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var previewImageZoomView: UIScrollView!
+    @IBOutlet weak var previewVideoView: UIView!
     @IBOutlet weak var previewEffectView: UIView!
     @IBOutlet weak var previewTapAreaView: UIView!
     @IBOutlet weak var displayGridView: TKDisplayGridView!
@@ -42,6 +43,8 @@ public class TKImagePickerViewController: UIViewController {
     
     private var albumCollection = TKAlbumCollection()
     private var albumsPresented = false
+    
+    private var videoPlayer: AVPlayer?
     
     private var previewPresented = true
     private var priorContentOffset: CGPoint?
@@ -321,6 +324,15 @@ extension TKImagePickerViewController: UIGestureRecognizerDelegate {
 
 extension TKImagePickerViewController: UICollectionViewDelegate {
     
+    private func initializeToPlayVideo(playerItem: AVPlayerItem?) {
+        videoPlayer = AVPlayer(playerItem: playerItem)
+        let videoPlayLayer = AVPlayerLayer(player: videoPlayer)
+        videoPlayLayer.frame = previewVideoView.frame
+        videoPlayLayer.videoGravity = .resizeAspectFill
+        previewVideoView.layer.addSublayer(videoPlayLayer)
+        videoPlayer?.play()
+    }
+    
     private func loadImage(at indexPath: IndexPath, size: CGSize, onSuccess: @escaping ((UIImage) -> ())) {
         guard let phAsset = albumCollection.currentAlbum?.photo(at: indexPath) else { return }
         
@@ -338,20 +350,44 @@ extension TKImagePickerViewController: UICollectionViewDelegate {
         })
     }
     
+    private func loadVideo(at indexPath: IndexPath, onSuccess: @escaping (() -> ())) {
+        guard let phAsset = albumCollection.currentAlbum?.photo(at: indexPath) else { return }
+        
+        let options = PHVideoRequestOptions()
+        options.deliveryMode = .mediumQualityFormat
+        options.isNetworkAccessAllowed = true
+        
+        PHImageManager.default().requestPlayerItem(forVideo: phAsset, options: options, resultHandler: { [weak self] playerItem, meta in
+            self?.initializeToPlayVideo(playerItem: playerItem)
+        })
+    }
+    
     private func isVisibleCell(at indexPath: IndexPath) -> Bool {
         return collectionView.indexPathsForVisibleItems.contains { $0 == indexPath }
     }
     
     public func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
-        loadImage(at: indexPath, size: previewAreaView.bounds.size, onSuccess: { [weak self] image in
-            guard let `self` = self else { return }
-            self.setImageToPreview(image, isFullscreen: true)
-            if !self.previewPresented {
-                self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
-            }
-            self.openPreview()
-        })
+        guard let mediaType = albumCollection.currentAlbum?.photo(at: indexPath)?.mediaType else { return }
+        switch mediaType {
+        case .image:
+            loadImage(at: indexPath, size: previewAreaView.bounds.size, onSuccess: { [weak self] image in
+                guard let `self` = self else { return }
+                self.setImageToPreview(image, isFullscreen: true)
+                if !self.previewPresented {
+                    self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+                }
+                self.openPreview()
+            })
+        case .video:
+            loadVideo(at: indexPath, onSuccess: {
+                print("load video successed")
+            })
+        default:
+            break
+        }
+        
+        
     }
 }
 
@@ -381,7 +417,6 @@ extension TKImagePickerViewController: UIScrollViewDelegate {
         }
     }
 }
-
 
 class TKPhotoCell: UICollectionViewCell {
     

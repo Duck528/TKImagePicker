@@ -119,6 +119,10 @@
                                             <outlet property="delegate" destination="c0y-kn-bRr" id="ety-Je-3m4"/>
                                         </connections>
                                     </scrollView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5pv-Rr-Wz1" userLabel="Preview Video View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ZS-Tv-P9Y" userLabel="Effect View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -140,11 +144,14 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="5pv-Rr-Wz1" secondAttribute="trailing" id="510-ML-mVb"/>
                                     <constraint firstItem="2M2-mr-vON" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="5Bq-Ot-jQk"/>
                                     <constraint firstItem="2M2-mr-vON" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="top" id="87L-m8-TMT"/>
                                     <constraint firstAttribute="bottom" secondItem="2M2-mr-vON" secondAttribute="bottom" id="BNz-De-yNL"/>
                                     <constraint firstAttribute="bottom" secondItem="6ZS-Tv-P9Y" secondAttribute="bottom" id="EkP-nS-RVl"/>
                                     <constraint firstItem="faG-0t-rg6" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="top" id="KOP-4O-cbJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="5pv-Rr-Wz1" secondAttribute="bottom" id="KdX-37-D25"/>
+                                    <constraint firstItem="5pv-Rr-Wz1" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="NBt-va-5gs"/>
                                     <constraint firstAttribute="bottom" secondItem="rhA-fE-JyX" secondAttribute="bottom" id="NoM-Ah-dKY"/>
                                     <constraint firstItem="faG-0t-rg6" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="PIX-9M-dIX"/>
                                     <constraint firstItem="6ZS-Tv-P9Y" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="top" id="Q8i-W6-fTa"/>
@@ -156,6 +163,7 @@
                                     <constraint firstItem="rhA-fE-JyX" firstAttribute="leading" secondItem="V41-j7-bou" secondAttribute="leading" id="dsW-nD-XCo"/>
                                     <constraint firstAttribute="trailing" secondItem="rhA-fE-JyX" secondAttribute="trailing" id="hXd-xP-yF8"/>
                                     <constraint firstAttribute="trailing" secondItem="2M2-mr-vON" secondAttribute="trailing" id="qil-KD-Ynv"/>
+                                    <constraint firstItem="5pv-Rr-Wz1" firstAttribute="top" secondItem="V41-j7-bou" secondAttribute="top" id="u8a-lL-3Og"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UaR-DV-m27">
@@ -254,6 +262,7 @@
                         <outlet property="previewImageView" destination="34a-L5-I3q" id="DCT-aB-l8b"/>
                         <outlet property="previewImageZoomView" destination="faG-0t-rg6" id="4bp-0w-KGI"/>
                         <outlet property="previewTapAreaView" destination="rhA-fE-JyX" id="Z6f-Fd-U3C"/>
+                        <outlet property="previewVideoView" destination="5pv-Rr-Wz1" id="18T-55-gax"/>
                         <outlet property="previewWidthConstraint" destination="CZL-it-Kae" id="rG6-eT-iqj"/>
                     </connections>
                 </viewController>

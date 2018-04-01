@@ -128,11 +128,11 @@
 		FC7BE9582054470700D36655 /* TKImagePicker */ = {
 			isa = PBXGroup;
 			children = (
+				FC7BE95A2054470700D36655 /* Info.plist */,
 				FC7BE9BE20545B2900D36655 /* TKUtil */,
 				FC7BE9652054487200D36655 /* TKResources */,
 				FC7BE963205447BA00D36655 /* TKAlbum */,
 				FC7BE9592054470700D36655 /* TKImagePicker.h */,
-				FC7BE95A2054470700D36655 /* Info.plist */,
 				FC7BE9612054477B00D36655 /* TKImagePicker.storyboard */,
 				FC7BE9B72054594E00D36655 /* TKImagePickerViewController.swift */,
 				FCE9F1C72056E06F00C256B9 /* TKGridLayout.swift */,
